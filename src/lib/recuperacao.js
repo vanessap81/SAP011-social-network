@@ -21,7 +21,8 @@ const content = `
 
                 </div>
                 `;
-                
+     
+
 container.innerHTML = content;
 
         const botaoRedefinir = container.querySelector("#btn-redefinir-senha");
