@@ -23,6 +23,7 @@
   }
 
   #main-register h1,
+  #main-recuperacao,
   #main-welcome h1 {
     text-align: center;
     font-size: 2rem;
@@ -96,6 +97,7 @@
   }
 
   #main-register .decoration,
+  #main-receperacao,
   #main-welcome .decoration {
     position: absolute;
   }
