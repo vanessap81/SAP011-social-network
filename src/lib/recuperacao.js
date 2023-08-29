@@ -1,6 +1,6 @@
-export default () => {
+export default (content) => {
 const content = `
-                <h1>Recuperação de Senha</h1>
+                <h1>Redefinir de Senha</h1>
                 <p>Confirme seu e-mail</p>
 
                 <div id="form-container">

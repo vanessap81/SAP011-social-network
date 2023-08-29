@@ -23,7 +23,7 @@
   }
 
   #main-register h1,
-  #main-recuperacao,
+  #main-recuperacao h1,
   #main-welcome h1 {
     text-align: center;
     font-size: 2rem;
@@ -66,7 +66,26 @@
     margin-bottom: 3rem;
   }
 
-  #main-register p {
+  #main-recuperacao #btn-redefinir-senha {
+    width: 70%;
+    height: 35px;
+    border: none;
+    align-self: center;
+    margin-top: 40px;
+    border-radius: 10px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    font-family: "DM Sans", sans-serif;
+    background-color: #33bbc5;
+    padding-top: 6px;
+    margin-top: 12rem;
+    margin-bottom: 3rem;
+  }
+
+  #main-register p,
+  #main-recuperacao p {
     text-align: center;
     font-family: "DM Sans", sans-serif;
     font-size: 0.8rem;
@@ -78,7 +97,8 @@
     color: blue;
   }
 
-  #main-register {
+  #main-register,
+  #main-recuperacao {
     display: flex;
     flex-direction: column;
   }
@@ -96,8 +116,21 @@
     background-color: #fff;
   }
 
+  #main-recuperacao #form-container {
+    width: 80%;
+    height: 450px;
+    border-radius: 25px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 50px;
+    background-color: #fff;
+  }
+
   #main-register .decoration,
-  #main-receperacao,
+  #main-recuperacao .decoration,
   #main-welcome .decoration {
     position: absolute;
   }
@@ -129,6 +162,15 @@
     right: 0;
     z-index: -1;
   }
+
+  #main-recuperacao #purple-ball img {
+    width: 200px;
+    height: 200px;
+    top: 280px;
+    right: 0;
+    z-index: -1;
+  }
+ 
  
   #main-welcome br {
     display: none;
@@ -142,7 +184,11 @@
     width: 320px;
   }
 
-  #main-register #form-container img {
+  #main-recuperacao #btn-redefinir-senha {
+    width: 200px;
+  }
+ 
+  #main-register #form-container {
     height: 65px;
     width: 65px;
     margin-top: 1em;
@@ -154,7 +200,15 @@
     display: flex;
     flex-direction: column;
   }
-  
+
+  #main-recuperacao #girl-dog img {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+    
   label {
     font-family: "DM Sans", sans-serif;
     font-size: 0.6em;
@@ -250,6 +304,40 @@
     label {
       font-size: 0.8em;
     }
+    
+    #main-recuperacao h1 {
+      font-size: 2.5rem;
+    }
+
+    #main-recuperacao #container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+    #main-recuperacao #form-container {
+      width: 50%;
+      height: fit-content;
+      padding-bottom: 30px;
+    }
+ 
+    #green-ball {
+      top: 80px;
+      left: 300px;
+    }
+
+    #main-recuperacao #purple-div {
+      display: block;
+      width: 200px;
+      height: 200px;
+      background-color: #614bc3;
+      top: 500px;
+      right: 300px;
+      border-radius: 50%;
+      position: absolute;
+      z-index: -1;
+    }
+
   }
   
   
