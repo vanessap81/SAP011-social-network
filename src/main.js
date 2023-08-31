@@ -66,7 +66,8 @@ function getContent(fragmentId) {
     `,
     recuperacao:`
     <section id="main-recuperacao">
-    <h1>Redefinir de Senha</h1>
+    <h1>MyPet</h1>
+    <h3>Redefinir de Senha</h3>
     <p>Confirme seu e-mail</p>
 
     <div id="form-container">
@@ -75,15 +76,13 @@ function getContent(fragmentId) {
     <p><input class="input" type="text" id="email" placeholder="seunome@email.com" required name="email" /></p>
 
     <div class="espaço-redefinir">
-    <button type="submit" class="btn-redefinir-senha" id="btn-redefinir-senha">Enviar</button>
+    <a href="#resetpassword" id="btn-redefinir-senha">Enviar</a>
     </div>
 
     <p>Você receberá um e-mail com o link para cadastrar uma nova senha.</p>
 
     </form>
-    <p id="msg-redefine-senha" class="msg-redefine-senha"></p>
-    <a href="#resetpassword" id="toTimeline">Redefinir senha</a>
-   
+      
     </div>
 
     <div class="decoration" id="green-ball"></div>
@@ -117,7 +116,7 @@ function getContent(fragmentId) {
     </div>
 
     </form>
-    <a href="#login" id="toTimeline">Redefinir senha</a>      
+        
     </div>
 
     </section>
@@ -149,7 +148,8 @@ function getContent(fragmentId) {
     <img src="./img/purple-ball.png" alt="" />
     </div>
 
-    <a href="#home" id="toTimeline">Redefinir senha</a>
+    <p><a href="">Esqueceu a senha?</a></p>
+    <a href="#register" id="toTimeline">Registre-se</a>
 
     </section>
 
