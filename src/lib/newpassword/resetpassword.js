@@ -1,5 +1,6 @@
-export default (content) => {
-  const content = `
+export default () => {
+  const container = document.getElementById("app");
+  const screen = `
 <section id="main-resetpassword">
 <h1>Redefinir de Senha</h1>
 <p>Confirme seu e-mail e senha</p>
@@ -25,5 +26,7 @@ export default (content) => {
 
 </section>
 `,
+
+container.innerHTML = screen;
 
 };

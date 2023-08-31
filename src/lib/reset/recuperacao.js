@@ -1,5 +1,6 @@
-export default (content) => {
-const content = `
+export default () => {
+      const container = document.getElementById("app");
+      const screen = `
 <section id="main-recuperacao">
 <h1>MyPet</h1>
 <h3>Redefinir de Senha</h3>
@@ -29,5 +30,7 @@ const content = `
 <img src="./img/girl-image.png" alt=""></div>
 </section>
 `,
-     
+
+container.innerHTML = screen;
+
 };
