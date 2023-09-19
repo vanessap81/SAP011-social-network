@@ -8,6 +8,8 @@ import searchIcon from "../../img/feed-search-icon.png";
 import postIcon from "../../img/feed-post-icon.png";
 import profileIcon from "../../img/feed-profile-icon.png";
 import postPhoto from "../../img/post-photo1-no-bg.png";
+import noHeart from "../../img/post-no-likes.png";
+import heart from "../../img/post-likes.png";
 
 const screen = `
       <section id="main-timeline">
@@ -62,9 +64,7 @@ export default () => {
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
-    // console.log(user.email);
     console.log(postPlace.value);
-    // const erased = document.getElementById("empty-feed");
 
     if (postPlace.value !== "") {
       const post = document.createElement("div");
@@ -80,9 +80,9 @@ export default () => {
               <p class="text">${postPlace.value}</p>
             </div>
           </div>
-          <div class="likes">
-            <p>0</p>
-            <img class="heart" src="./img/post-no-likes.png" alt="Likes">
+          <div class="dateAndLikes">
+            <p>Postado em:</p>
+            <p>0 <img class="heart" src="${noHeart}" alt="Likes"></p>
           </div>
         </div>`;
 
@@ -90,32 +90,8 @@ export default () => {
 
       document.getElementById("feed-container").appendChild(post);
       postPlace.value = "";
-      // } else if (postPlace.value !== "" && !erased) {
-      //   const post = document.createElement("div");
-
-      //   // LAYOUT DA POSTAGEM
-      //   const postLayout = `
-      //     <div class="post">
-      //       <div class="user-info">
-      //         <img src="./img/post-photo1-no-bg.png" alt="Foto do perfil">
-      //         <div class="post-text">
-      //           <p class="username">@meu-pet-é-lindo diz:</p>
-      //           <p class="text">${postPlace.value}</p>
-      //         </div>
-      //       </div>
-      //       <div class="likes">
-      //         <p>0</p>
-      //         <img class="heart" src="./img/post-no-likes.png" alt="Likes">
-      //       </div>
-      //     </div>`;
-
-      //   post.innerHTML = postLayout;
-      //   document.getElementById("feed-container").appendChild(post);
-      //   postPlace.value = "";
     }
   }
 
   postButton.addEventListener("click", postIt);
 };
-
-// <p id="empty-feed">Ainda não temos postagens por aqui. <br><br> <img src="${meme}" alt="Cat Meme"></p>

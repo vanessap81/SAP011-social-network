@@ -60,25 +60,27 @@ const provider = new GoogleAuthProvider();
 async function signGoogle() {
   await signInWithPopup(auth(), provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
-      // The signed-in user info.
       const user = result.user;
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
     })
     .catch((error) => {
-      // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
-      // const email = error.customData.email;
-      // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
     });
-  // location.hash = "#timeline";
+  // Caso não exista cria o usuário na collection
+  // Chamar getDoc e setDoc do firebase
+  // const userData = await getDoc(doc(db, "users", auth.currentUser.uid));
+  // if (!userData.exists()) {
+  //   const userGoogle = {
+  //     email: auth.currentUser.email,
+  //     nome: auth.currentUser.displayName,
+  //   };
+
+  //   await setDoc(doc(db, "users", auth.currentUser.uid), userGoogle);
+  //   console.log("usuarioCriado");
+  // }
 }
 
 async function resetLink(email) {
