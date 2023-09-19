@@ -7,34 +7,26 @@ import {
   sendPasswordResetEmail,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 
-import { collection, doc, addDoc, setDoc, updateDoc } from "firebase/firestore";
-
-import { app, db } from "./config.js";
+import { app } from "./config.js";
 
 const auth = () => getAuth(app);
-// const user = auth.currentUser;
 
 async function createUser(name, email, password) {
   await createUserWithEmailAndPassword(auth(), email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      // ...
+    .then(() => {
+      updateProfile(auth().currentUser, {
+        displayName: name,
+      });
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
+      throw error;
     });
-
-  const userProfile = { name, email };
-
-  await setDoc(doc(db, "users", auth.currentUser.uid), userProfile);
-  // location.hash = "#welcome";
 }
 
-export const checkLogin = () => {
+function checkLogin() {
   onAuthStateChanged(auth(), (user) => {
     if (user) {
       // window.location.href = "#timeline";
@@ -44,11 +36,11 @@ export const checkLogin = () => {
       window.location.href = "#login";
     }
   });
-};
+}
 
-export const getUserInfo = () => {
-  return auth.currentUser;
-};
+function getUserInfo() {
+  return auth().currentUser;
+}
 
 async function signIn(email, password) {
   await signInWithEmailAndPassword(auth(), email, password)
@@ -114,4 +106,12 @@ async function exit() {
   location.hash = "#login";
 }
 
-export { createUser, signIn, signGoogle, resetLink, exit };
+export {
+  createUser,
+  signIn,
+  signGoogle,
+  resetLink,
+  exit,
+  checkLogin,
+  getUserInfo,
+};

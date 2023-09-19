@@ -1,5 +1,5 @@
-import { exit } from "../../firebase/auth.js";
-import meme from "../../img/angry-cat.gif";
+import { exit, getUserInfo } from "../../firebase/auth.js";
+// import meme from "../../img/angry-cat.gif";
 import feedLogo from "../../img/logo-top-timeline.png";
 import exitIcon from "../../img/exit-icon.png";
 import sendIcon from "../../img/send-button-white.png";
@@ -7,6 +7,7 @@ import homeIcon from "../../img/feed-home-icon.png";
 import searchIcon from "../../img/feed-search-icon.png";
 import postIcon from "../../img/feed-post-icon.png";
 import profileIcon from "../../img/feed-profile-icon.png";
+import postPhoto from "../../img/post-photo1-no-bg.png";
 
 const screen = `
       <section id="main-timeline">
@@ -20,7 +21,7 @@ const screen = `
           <div id="feed">
 
             <div id="feed-container">
-                <p id="empty-feed">Ainda não temos postagens por aqui. <br><br> <img src="${meme}" alt="Cat Meme"></p>
+
             </div>
 
             <div id="input-container">
@@ -63,18 +64,19 @@ export default () => {
   function postIt() {
     // console.log(user.email);
     console.log(postPlace.value);
-    const erased = document.getElementById("empty-feed");
+    // const erased = document.getElementById("empty-feed");
 
-    if (postPlace.value !== "" && erased) {
+    if (postPlace.value !== "") {
       const post = document.createElement("div");
+      const user = getUserInfo();
 
       // LAYOUT DA POSTAGEM
       const postLayout = `
         <div class="post">
           <div class="user-info">
-            <img src="./img/post-photo1-no-bg.png" alt="Foto do perfil">
+            <img src="${postPhoto}" alt="Foto do perfil">
             <div class="post-text">
-              <p class="username">@meu-pet-é-lindo diz:</p>
+              <p class="username">${user.displayName} diz:</p>
               <p class="text">${postPlace.value}</p>
             </div>
           </div>
@@ -87,32 +89,33 @@ export default () => {
       post.innerHTML = postLayout;
 
       document.getElementById("feed-container").appendChild(post);
-      erased.parentNode.removeChild(erased);
       postPlace.value = "";
-    } else if (postPlace.value !== "" && !erased) {
-      const post = document.createElement("div");
+      // } else if (postPlace.value !== "" && !erased) {
+      //   const post = document.createElement("div");
 
-      // LAYOUT DA POSTAGEM
-      const postLayout = `
-        <div class="post">
-          <div class="user-info">
-            <img src="./img/post-photo1-no-bg.png" alt="Foto do perfil">
-            <div class="post-text">
-              <p class="username">@meu-pet-é-lindo diz:</p>
-              <p class="text">${postPlace.value}</p>
-            </div>
-          </div>
-          <div class="likes">
-            <p>0</p>
-            <img class="heart" src="./img/post-no-likes.png" alt="Likes">
-          </div>
-        </div>`;
+      //   // LAYOUT DA POSTAGEM
+      //   const postLayout = `
+      //     <div class="post">
+      //       <div class="user-info">
+      //         <img src="./img/post-photo1-no-bg.png" alt="Foto do perfil">
+      //         <div class="post-text">
+      //           <p class="username">@meu-pet-é-lindo diz:</p>
+      //           <p class="text">${postPlace.value}</p>
+      //         </div>
+      //       </div>
+      //       <div class="likes">
+      //         <p>0</p>
+      //         <img class="heart" src="./img/post-no-likes.png" alt="Likes">
+      //       </div>
+      //     </div>`;
 
-      post.innerHTML = postLayout;
-      document.getElementById("feed-container").appendChild(post);
-      postPlace.value = "";
+      //   post.innerHTML = postLayout;
+      //   document.getElementById("feed-container").appendChild(post);
+      //   postPlace.value = "";
     }
   }
 
   postButton.addEventListener("click", postIt);
 };
+
+// <p id="empty-feed">Ainda não temos postagens por aqui. <br><br> <img src="${meme}" alt="Cat Meme"></p>
