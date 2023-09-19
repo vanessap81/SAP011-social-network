@@ -50,16 +50,20 @@ export default () => {
   const container = document.getElementById("app");
   container.innerHTML = screen;
 
+  const nameId = document.getElementById("nameId");
   const emailId = document.getElementById("emailId");
   const passwordId = document.getElementById("passwordId");
 
   function captureData(event) {
     event.preventDefault();
 
+    const nameUser = nameId.value;
     const emailUser = emailId.value;
     const passwordUser = passwordId.value;
 
-    createUser(emailUser, passwordUser).then((location.hash = "#welcome"));
+    createUser(nameUser, emailUser, passwordUser).then(
+      (location.hash = "#welcome")
+    );
   }
 
   const submit = document.getElementById("submit");

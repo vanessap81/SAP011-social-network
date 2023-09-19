@@ -9,13 +9,14 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { app } from "./config.js";
+import { collection, doc, addDoc, setDoc, updateDoc } from "firebase/firestore";
 
-// Initialize Firebase
+import { app, db } from "./config.js";
+
 const auth = () => getAuth(app);
 // const user = auth.currentUser;
 
-async function createUser(email, password) {
+async function createUser(name, email, password) {
   await createUserWithEmailAndPassword(auth(), email, password)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -26,6 +27,10 @@ async function createUser(email, password) {
       const errorMessage = error.message;
       // ..
     });
+
+  const userProfile = { name, email };
+
+  await setDoc(doc(db, "users", auth.currentUser.uid), userProfile);
   // location.hash = "#welcome";
 }
 

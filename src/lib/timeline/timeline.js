@@ -1,7 +1,7 @@
-import { exit, getUserInfo } from "../../firebase/auth.js";
+import { exit } from "../../firebase/auth.js";
 import meme from "../../img/angry-cat.gif";
 import feedLogo from "../../img/logo-top-timeline.png";
-import exitIcon from "../../img/feed-exit-icon.png";
+import exitIcon from "../../img/exit-icon.png";
 import sendIcon from "../../img/send-button-white.png";
 import homeIcon from "../../img/feed-home-icon.png";
 import searchIcon from "../../img/feed-search-icon.png";
@@ -58,12 +58,6 @@ export default () => {
 
   const postButton = document.getElementById("publish-button");
   const postPlace = document.getElementById("postPlace");
-
-  // const user = getUserInfo();
-  function teste() {
-    console.log(getUserInfo());
-  }
-  teste();
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
