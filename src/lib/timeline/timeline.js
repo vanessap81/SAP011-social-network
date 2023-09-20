@@ -9,7 +9,8 @@ import postIcon from "../../img/feed-post-icon.png";
 import profileIcon from "../../img/feed-profile-icon.png";
 import postPhoto from "../../img/post-photo1-no-bg.png";
 import noHeart from "../../img/post-no-likes.png";
-import heart from "../../img/post-likes.png";
+// import heart from "../../img/post-likes.png";
+import { savePost } from "../../firebase/firestore.js";
 
 const screen = `
       <section id="main-timeline">
@@ -61,13 +62,12 @@ export default () => {
 
   const postButton = document.getElementById("publish-button");
   const postPlace = document.getElementById("postPlace");
+  const feedContainer = document.getElementById("feed-container");
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
-    console.log(postPlace.value);
-
     if (postPlace.value !== "") {
-      const post = document.createElement("div");
+      const postContainer = document.createElement("div");
       const user = getUserInfo();
 
       // LAYOUT DA POSTAGEM
@@ -81,17 +81,22 @@ export default () => {
             </div>
           </div>
           <div class="dateAndLikes">
-            <p>Postado em:</p>
+            <p class="postDate">Postado em:</p>
             <p>0 <img class="heart" src="${noHeart}" alt="Likes"></p>
           </div>
         </div>`;
 
-      post.innerHTML = postLayout;
+      postContainer.innerHTML = postLayout;
 
-      document.getElementById("feed-container").appendChild(post);
+      feedContainer.appendChild(postContainer);
       postPlace.value = "";
     }
   }
 
-  postButton.addEventListener("click", postIt);
+  async function createNewPost() {
+    await savePost(postPlace.value);
+    postIt();
+  }
+
+  postButton.addEventListener("click", createNewPost);
 };

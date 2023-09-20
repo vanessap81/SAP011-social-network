@@ -152,12 +152,17 @@
   margin: 0;
 }
 
+#feed-container div .post .dateAndLikes .postDate {
+  font-size: 0.8em;
+  color: grey;
+  margin-left: 70px;
+}
+
+
 #feed-container div .post .dateAndLikes img {
   width: 24px;
   padding-right: 8px;
 }
-
-
 
 /* FIM FORMATAÇÃO DOS POST */
 

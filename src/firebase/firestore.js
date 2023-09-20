@@ -1,5 +1,6 @@
-import { db } from "./config.js";
 import { collection, addDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { db, app } from "./config.js";
 
 const auth = () => getAuth(app);
 
@@ -9,8 +10,8 @@ async function savePost(postText) {
   const postDate = currentDate.toLocaleDateString();
 
   const post = {
-    author: auth.currentUser.uid,
-    name: auth.currentUser.displayName,
+    author: auth().currentUser.uid,
+    name: auth().currentUser.displayName,
     texto: postText,
     likes: [],
     data: postDate,
@@ -21,4 +22,4 @@ async function savePost(postText) {
   return post;
 }
 
-export { savePost };
+export { auth, savePost };
