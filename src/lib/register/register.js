@@ -54,16 +54,15 @@ export default () => {
   const emailId = document.getElementById("emailId");
   const passwordId = document.getElementById("passwordId");
 
-  function captureData(event) {
+  async function captureData(event) {
     event.preventDefault();
 
     const nameUser = nameId.value;
     const emailUser = emailId.value;
     const passwordUser = passwordId.value;
 
-    createUser(nameUser, emailUser, passwordUser).then(
-      (location.hash = "#welcome")
-    );
+    await createUser(nameUser, emailUser, passwordUser);
+    location.hash = "#welcome";
   }
 
   const submit = document.getElementById("submit");

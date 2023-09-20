@@ -30,8 +30,8 @@ function checkLogin() {
   onAuthStateChanged(auth(), (user) => {
     if (user) {
       // window.location.href = "#timeline";
-      // return user.email;
       console.log("usuário logado");
+      return true;
     } else {
       window.location.href = "#login";
     }
