@@ -1,4 +1,4 @@
-import { signIn, signGoogle } from "../../firebase/auth.js";
+import { signIn, signGoogle, checkLogin } from "../../firebase/auth.js";
 import logo from "../../img/logo-login.png";
 import ball from "../../img/purple-ball.png";
 import girl from "../../img/girl-image.png";
@@ -53,13 +53,16 @@ export default () => {
   const emailId = document.getElementById("emailId");
   const passwordId = document.getElementById("passwordId");
 
-  function captureData(event) {
+  async function captureData(event) {
     event.preventDefault();
 
     const emailUser = emailId.value;
     const passwordUser = passwordId.value;
 
-    signIn(emailUser, passwordUser).then((location.hash = "timeline"));
+    await signIn(emailUser, passwordUser);
+    if (checkLogin === true) {
+      location.hash = "timeline";
+    }
   }
 
   const submit = document.getElementById("submit");
