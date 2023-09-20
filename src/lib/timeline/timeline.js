@@ -10,7 +10,7 @@ import profileIcon from "../../img/feed-profile-icon.png";
 import postPhoto from "../../img/post-photo1-no-bg.png";
 import noHeart from "../../img/post-no-likes.png";
 // import heart from "../../img/post-likes.png";
-import { savePost } from "../../firebase/firestore.js";
+import { savePost, querySnapshot } from "../../firebase/firestore.js";
 
 const screen = `
       <section id="main-timeline">
@@ -23,9 +23,7 @@ const screen = `
 
           <div id="feed">
 
-            <div id="feed-container">
-
-            </div>
+            <div id="feed-container"></div>
 
             <div id="input-container">
               <input type="text" name="post" placeholder="Publique algo" id="postPlace"/>
@@ -63,6 +61,34 @@ export default () => {
   const postButton = document.getElementById("publish-button");
   const postPlace = document.getElementById("postPlace");
   const feedContainer = document.getElementById("feed-container");
+
+  // EXIBIR POST DA COLEÇÃO
+
+  // function putPostsInFeed(collection) {
+  //   feedContainer.innerHTML = collection
+  //     .forEach(
+  //       (post) => `
+  //       <div class="post">
+  //         <div class="user-info">
+  //           <img src="${postPhoto}" alt="Foto do perfil">
+  //           <div class="post-text">
+  //             <p class="username">${post.name} diz:</p>
+  //             <p class="text">${post.texto}</p>
+  //           </div>
+  //         </div>
+  //         <div class="dateAndLikes">
+  //         <p class="postDate">Postado em: ${post.data}</p>
+  //         <p>0 <img class="heart" src="${noHeart}" alt="Likes"></p>
+  //         </div>
+  //       </div>
+  //     `
+  //     )
+  //     .join("");
+  // }
+
+  // const collection = querySnapshot;
+  // console.log(collection);
+  // putPostsInFeed(collection);
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {

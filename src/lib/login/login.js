@@ -60,9 +60,8 @@ export default () => {
     const passwordUser = passwordId.value;
 
     await signIn(emailUser, passwordUser);
-    if (checkLogin === true) {
-      location.hash = "timeline";
-    }
+    await checkLogin;
+    location.hash = "timeline";
   }
 
   const submit = document.getElementById("submit");

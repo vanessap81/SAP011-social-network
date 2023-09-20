@@ -31,7 +31,6 @@ function checkLogin() {
     if (user) {
       // window.location.href = "#timeline";
       console.log("usuário logado");
-      return true;
     } else {
       window.location.href = "#login";
     }
@@ -84,27 +83,11 @@ async function signGoogle() {
 }
 
 async function resetLink(email) {
-  await sendPasswordResetEmail(auth(), email)
-    .then(() => {
-      // Password reset email sent!
-      // ..
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
-  //location.hash = "#login";
+  await sendPasswordResetEmail(auth(), email);
 }
 
 async function exit() {
-  await signOut(auth())
-    .then(() => {
-      // Sign-out successful.
-    })
-    .catch((error) => {
-      // An error happened.
-    });
+  await signOut(auth());
   location.hash = "#login";
 }
 
