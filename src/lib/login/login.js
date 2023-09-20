@@ -65,10 +65,11 @@ export default () => {
   const submit = document.getElementById("submit");
   submit.addEventListener("click", captureData);
 
-  function signInGoogle(event) {
+  async function signInGoogle(event) {
     event.preventDefault();
 
-    signGoogle().then((location.hash = "#timeline"));
+    await signGoogle();
+    location.hash = "#timeline";
   }
 
   const loginGoogle = document.getElementById("loginGoogle");
