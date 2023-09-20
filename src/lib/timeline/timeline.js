@@ -70,6 +70,10 @@ export default () => {
       const postContainer = document.createElement("div");
       const user = getUserInfo();
 
+      const date = Date.now();
+      const currentDate = new Date(date);
+      const postDate = currentDate.toLocaleDateString();
+
       // LAYOUT DA POSTAGEM
       const postLayout = `
         <div class="post">
@@ -81,7 +85,7 @@ export default () => {
             </div>
           </div>
           <div class="dateAndLikes">
-            <p class="postDate">Postado em:</p>
+            <p class="postDate">Postado em: ${postDate}</p>
             <p>0 <img class="heart" src="${noHeart}" alt="Likes"></p>
           </div>
         </div>`;
