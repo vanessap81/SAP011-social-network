@@ -23,10 +23,10 @@ async function savePost(postText) {
   return post;
 }
 
-const querySnapshot = await getDocs(collection(db, "posts"));
-querySnapshot.forEach((doc) => {
-  console.log(doc.id, " => ", doc.data());
-});
+// const querySnapshot = await getDocs(collection(db, "posts"));
+// querySnapshot.forEach((doc) => {
+//   console.log(doc.id, " => ", doc.data());
+// });
 
 // async function showPosts() {
 //   const textos = [];
@@ -40,4 +40,4 @@ querySnapshot.forEach((doc) => {
 //   return textos;
 // }
 
-export { auth, savePost, querySnapshot };
+export { auth, savePost };

@@ -10,7 +10,7 @@ import profileIcon from "../../img/feed-profile-icon.png";
 import postPhoto from "../../img/post-photo1-no-bg.png";
 import noHeart from "../../img/post-no-likes.png";
 // import heart from "../../img/post-likes.png";
-import { savePost, querySnapshot } from "../../firebase/firestore.js";
+import { savePost } from "../../firebase/firestore.js";
 
 const screen = `
       <section id="main-timeline">
