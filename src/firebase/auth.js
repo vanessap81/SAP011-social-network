@@ -68,18 +68,6 @@ async function signGoogle() {
       const errorMessage = error.message;
       const credential = GoogleAuthProvider.credentialFromError(error);
     });
-  // Caso não exista cria o usuário na collection
-  // Chamar getDoc e setDoc do firebase
-  // const userData = await getDoc(doc(db, "users", auth.currentUser.uid));
-  // if (!userData.exists()) {
-  //   const userGoogle = {
-  //     email: auth.currentUser.email,
-  //     nome: auth.currentUser.displayName,
-  //   };
-
-  //   await setDoc(doc(db, "users", auth.currentUser.uid), userGoogle);
-  //   console.log("usuarioCriado");
-  // }
 }
 
 async function resetLink(email) {

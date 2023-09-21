@@ -60,7 +60,7 @@ export default () => {
     const passwordUser = passwordId.value;
 
     await signIn(emailUser, passwordUser);
-    await checkLogin;
+    checkLogin();
     location.hash = "timeline";
   }
 

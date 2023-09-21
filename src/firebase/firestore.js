@@ -23,21 +23,27 @@ async function savePost(postText) {
   return post;
 }
 
-// const querySnapshot = await getDocs(collection(db, "posts"));
-// querySnapshot.forEach((doc) => {
-//   console.log(doc.id, " => ", doc.data());
-// });
+async function getPosts() {
+  const querySnapshot = await getDocs(collection(db, "posts"));
+  const postsInFirebase = [];
+  querySnapshot.forEach((doc) => {
+    const collection = doc.data();
+    postsInFirebase.push(collection);
+  });
+  return postsInFirebase;
+}
 
-// async function showPosts() {
-//   const textos = [];
-//   const ordenarPost = query(collection(db, "posts"), orderBy("data", "desc"));
-//   const colecaoPosts = await getDocs(ordenarPost);
-//   colecaoPosts.forEach((post) => {
-//     const data = post.data();
-//     data.id = post.id;
-//     textos.push(data);
+export { auth, savePost, getPosts };
+
+// async function getPosts() {
+//   const querySnapshot = await getDocs(collection(db, "posts"));
+//   const postsInFirebase = [];
+//   querySnapshot.forEach((doc) => {
+//     const collection = {
+//       // docId: doc.id,
+//       docData: doc.data(),
+//     };
+//     postsInFirebase.push(collection);
 //   });
-//   return textos;
+//   return postsInFirebase;
 // }
-
-export { auth, savePost };

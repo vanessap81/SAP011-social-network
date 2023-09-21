@@ -78,7 +78,7 @@
 }
 
 #feed-container div {
-  width: 90%;
+  width: 95%;
   height: fit-content;
   display: flex;
   flex-wrap: wrap;
@@ -94,6 +94,15 @@
 }
 
 /* FORMATAÇÃO DOS POST */
+#feed-container .post {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+  padding: 0;
+}
+
 #feed-container div .post {
   width: 100%;
   display: flex;
@@ -101,6 +110,17 @@
   justify-content: center;
   background-color: #fff;
   padding: 0;
+}
+
+#feed-container .post .user-info {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: start;
+  padding: 0;
+  border-radius: 0;
+  /* border: solid 1px red; */
 }
 
 #feed-container div .post .user-info {
@@ -114,11 +134,13 @@
   /* border: solid 1px red; */
 }
 
+#feed-container .post .user-info img,
 #feed-container div .post .user-info img {
   width: 45px;
   margin-top: 5px;
 }
 
+#feed-container .post .post-text,
 #feed-container div .post .post-text {
   width: 82%;
   display: flex;
@@ -127,6 +149,7 @@
   padding: 0;
 }
 
+#feed-container .post .post-text p,
 #feed-container div .post .post-text p {
   width: 95%;
   margin: 0;
@@ -134,9 +157,19 @@
   padding-left: 8px;
 }
 
+#feed-container .post .post-text .username,
 #feed-container div .post .post-text .username {
   padding-bottom: 8px;
   font-weight: bold;
+}
+
+#feed-container .post .dateAndLikes {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border: solid 1px green; */
+  padding: 0;
 }
 
 #feed-container div .post .dateAndLikes {
@@ -148,17 +181,19 @@
   padding: 0;
 }
 
+#feed-container .post .dateAndLikes p,
 #feed-container div .post .dateAndLikes p {
   margin: 0;
 }
 
+#feed-container .post .dateAndLikes .postDate,
 #feed-container div .post .dateAndLikes .postDate {
   font-size: 0.8em;
   color: grey;
   margin-left: 70px;
 }
 
-
+#feed-container .post .dateAndLikes img,
 #feed-container div .post .dateAndLikes img {
   width: 24px;
   padding-right: 8px;

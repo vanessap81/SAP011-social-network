@@ -6,7 +6,7 @@ import reset from "./lib/reset/reset.js";
 import newpassword from "./lib/newpassword/newpassword.js";
 import { checkLogin } from "./firebase/auth.js";
 
-function loadContent() {
+async function loadContent() {
   const fragmentId = location.hash.substring(1);
   console.log(fragmentId);
   switch (fragmentId) {
@@ -23,7 +23,7 @@ function loadContent() {
       welcome();
       break;
     case "timeline":
-      timeline();
+      await timeline();
       break;
     default:
       login();
