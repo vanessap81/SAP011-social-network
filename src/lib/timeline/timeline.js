@@ -34,16 +34,9 @@ const screen = `
           </div>
 
           <div id="functions">
-
             <button id="home-button" type="button"><img src="${homeIcon}" alt=""></button>
-
-            <button id="search-button" type="button"><img src="${searchIcon}" alt="sair"></button>
-
-            <button id="my-post-button" type="button"><img src="${postIcon}" alt="minhas postagens"></button>
-
-            <button id="profile-button" type="button"><img src="${profileIcon}" alt="meu perfil"></button>
-
         </div>
+
       </section>`;
 
 export default async () => {
@@ -85,7 +78,8 @@ export default async () => {
           </div>
           <div class="dateAndLikes">
             <p class="postDate">Postado em: ${postDate}</p>
-            <p>0 <img class="heart" src="${noHeart}" alt="Likes"></p>
+            <p class="likesNumber">0</p>
+            <p><img class="heart" src="${noHeart}" alt="Likes"></p>
           </div>
         </div>`;
 
@@ -104,7 +98,6 @@ export default async () => {
   postButton.addEventListener("click", createNewPost);
 
   const arrayDePosts = await getPosts();
-  console.log(arrayDePosts[2].name);
   // EXIBIR POST DA COLEÇÃO
   function putPostsInFeed() {
     feedContainer.innerHTML = arrayDePosts
@@ -120,7 +113,8 @@ export default async () => {
           </div>
           <div class="dateAndLikes">
           <p class="postDate">Postado em: ${post.data}</p>
-          <p>0 <img class="heart" src="${noHeart}" alt="Likes"></p>
+          <p class="likesNumber">0</p>
+          <p><img class="heart" src="${noHeart}" alt="Likes"></p>
           </div>
         </div>
       `
