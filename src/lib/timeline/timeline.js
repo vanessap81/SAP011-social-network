@@ -7,8 +7,15 @@ import postPhoto from "../../img/post-photo1-no-bg.png";
 import noHeart from "../../img/post-no-likes.png";
 import pencil from "../../img/post-edit.png";
 import trash from "../../img/post-trash.png";
-// import heart from "../../img/post-likes.png";
-import { savePost, getPosts, deletePost } from "../../firebase/firestore.js";
+import heart from "../../img/post-likes.png";
+import {
+  savePost,
+  getPosts,
+  deletePost,
+  likeIt,
+  disLikeIt,
+} from "../../firebase/firestore.js";
+import { doc } from "firebase/firestore";
 // import { async } from "regenerator-runtime";
 
 const screen = `
@@ -54,6 +61,57 @@ export default async () => {
   const postPlace = document.getElementById("postPlace");
   const feedContainer = document.getElementById("feed-container");
 
+  // EXIBIR POST DA COLEÇÃO
+  const arrayDePosts = await getPosts();
+
+  function putPostsInFeed() {
+    getUserInfo();
+
+    feedContainer.innerHTML = arrayDePosts
+      .map(
+        (post) => `
+        <div class="post">
+          <div class="user-info">
+            <img src="${postPhoto}" alt="Foto do perfil">
+            <div class="post-text">
+              <p class="username">${post.name}</p>
+              <p class="postAuthor">${post.author}</p>
+              <p class="text">${post.texto}</p>
+            </div>
+          </div>
+          <div class="dateAndLikes">
+            <p class="postDate">${post.data}</p>
+            ${
+              post.author === auth().currentUser.uid
+                ? `
+              <button type="button" class="btn-delete" data-postid="${post.postId}"><img class="trash" src="${trash}" alt="Apagar   post"></button>
+
+              <button type="button" id="btn-edit" class="btn-edit" data-postid="${post.postId}"><img class="edit" src="${pencil}" alt="Editar   post"></button>
+            `
+                : ""
+            }
+            <div class="likesNumber">
+              
+              <button type="button" class="btn-like">
+                <img ${
+                  post.likes.includes(auth().currentUser.uid)
+                    ? `src="${heart}"`
+                    : `src="${noHeart}"`
+                } class="heart" alt="Likes">
+              </button>
+              <p>${post.likes.length}</p>
+
+            </div>
+            
+          </div>
+        </div>
+        `
+      )
+      .join("");
+  }
+
+  putPostsInFeed();
+
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
     const postContainer = document.createElement("div");
@@ -75,10 +133,12 @@ export default async () => {
           </div>
           <div class="dateAndLikes">
             <p class="postDate">${postDate}</p>
-            <button type="button" id="btn-delete"><img class="trash" src="${trash}" alt="Likes"></button>
-            <button type="button" id="btn-edit"><img class="edit" src="${pencil}" alt="Likes"></button>
-            <p class="likesNumber">0</p>
-            <button type="button" id="btn-like"><img class="heart" src="${noHeart}" alt="Likes"></button>
+            <button type="button" class="btn-delete"><img class="trash" src="${trash}" alt="Apagar post"></button>
+            <button type="button" class="btn-edit"><img class="edit" src="${pencil}" alt="Editar Post"></button>
+            <div class="likesNumber">
+              <p>0</p>
+              <button type="button" id="btn-like"><img class="heart" src="${noHeart}" alt="Likes"></button>
+            </div>
             
             <div class="modal-container id="modal-container">
               <div class="modal">
@@ -99,11 +159,6 @@ export default async () => {
       .getElementById("feed-container")
       .insertAdjacentElement("afterbegin", postContainer);
     postPlace.value = "";
-
-    //if para função de mostrar ou ocultar icones de editar e excluir
-    // if (  === auth().currentUser.uid) {
-    //   console.log("iguais");
-    // }
   }
 
   async function createNewPost() {
@@ -115,41 +170,23 @@ export default async () => {
 
   postButton.addEventListener("click", createNewPost);
 
-  // EXIBIR POST DA COLEÇÃO
-  const arrayDePosts = await getPosts();
+  // Função curtir post
+  const allBtnLike = document.getElementsByClassName(".btn-like");
 
-  function putPostsInFeed() {
-    feedContainer.innerHTML = arrayDePosts
-      .map(
-        (post) => `
-        <div class="post">
-          <div class="user-info">
-            <img src="${postPhoto}" alt="Foto do perfil">
-            <div class="post-text">
-              <p class="username">${post.name}</p>
-              <p class="postAuthor">${post.author}</p>
-              <p class="text">${post.texto}</p>
-            </div>
-          </div>
-          <div class="dateAndLikes">
-            <p class="postDate">${post.data}</p>
-            <button type="button" id="btn-delete"><img class="trash" src="${trash}" alt="Likes"></button>
-            <button type="button" id="btn-edit"><img class="edit" src="${pencil}" alt="Likes"></button>
-            <p class="likesNumber">0</p>
-            <button type="button" id="btn-like"><img class="heart" src="${noHeart}" alt="Likes"></button>
-          </div>
-        </div>
-      `
-      )
-      .join("");
+  allBtnLike.addEventListener("click", () => {
+    const btnLike = document.getElementById("btn-like");
+    const postId = btnLike.dataset.postId;
+    console.log(postId);
+    // likeIt(postId, auth().currentUser.uid);
+    // post.likes.push(auth().currentUser.uid);
+  });
 
-    getUserInfo();
-    console.log(auth().currentUser.uid);
+  // função para deletar post
+  // function compareAndDelete() {
 
-    // if (post.author === auth().currentUser.uid) {
-    //   console.log("iguais");
-    // }
-  }
+  //   // deletePost(postId);
+  // }
 
-  putPostsInFeed();
+  // const btnDelete = document.getElementsByClassName("btn-delete");
+  // btnDelete.addEventListener("click", compareAndDelete());
 };

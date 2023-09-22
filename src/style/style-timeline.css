@@ -188,8 +188,15 @@
   padding: 0;
 }
 
-#feed-container .post .dateAndLikes p,
-#feed-container div .post .dateAndLikes p {
+#feed-container .post .dateAndLikes .likesNumber,
+#feed-container div .post .dateAndLikes .likesNumber {
+  width: 60px;
+  margin: 0;
+  height: 24px;
+}
+
+#feed-container .post .dateAndLikes .likesNumber p,
+#feed-container div .post .dateAndLikes .likesNumber p {
   margin: 0;
 }
 
@@ -197,7 +204,7 @@
 #feed-container div .post .dateAndLikes .postDate {
   font-size: 0.8em;
   color: grey;
-  margin-left: 70px;
+  margin: 0 0 0 70px;
 }
 
 #feed-container .post .dateAndLikes button,

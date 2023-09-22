@@ -4,6 +4,9 @@ import {
   getDocs,
   query,
   orderBy,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
   deleteDoc,
 } from "firebase/firestore";
 
@@ -39,18 +42,30 @@ async function getPosts() {
     collection.postId = doc.id;
     postsInFirebase.push(collection);
   });
-  // console.log(`Post Author: ${postsInFirebase[0].author}`);
+  // console.log(postsInFirebase[0]);
   // console.log(`Post Id: ${postsInFirebase[0].postId}`);
   return postsInFirebase;
 }
 
 // EM CONSTRUÇÃO
-const deletePost = (postId) => {
+function deletePost(postId) {
   const postRef = doc(db, "posts", postId);
   deleteDoc(postRef);
-};
+}
 
-export { auth, savePost, getPosts, deletePost };
+function likeIt(postId, uid) {
+  updateDoc(doc(db, "posts", postId), {
+    likes: arrayUnion(uid),
+  });
+}
+
+function disLikeIt(postId, uid) {
+  updateDoc(doc(db, "posts", postId), {
+    likes: arrayRemove(uid),
+  });
+}
+
+export { auth, savePost, getPosts, deletePost, likeIt, disLikeIt };
 
 // async function getPosts() {
 //   const querySnapshot = await getDocs(collection(db, "posts"));
