@@ -19,6 +19,7 @@ async function createUser(name, email, password) {
     .then(() => {
       updateProfile(auth().currentUser, {
         displayName: name,
+        // photoURL:
       });
     })
     .catch((error) => {
@@ -80,6 +81,7 @@ async function exit() {
 }
 
 export {
+  auth,
   createUser,
   signIn,
   signGoogle,

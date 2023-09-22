@@ -1,17 +1,15 @@
-import { exit, getUserInfo } from "../../firebase/auth.js";
-// import meme from "../../img/angry-cat.gif";
+import { exit, auth, getUserInfo } from "../../firebase/auth.js";
 import feedLogo from "../../img/logo-top-timeline.png";
 import exitIcon from "../../img/exit-icon.png";
 import sendIcon from "../../img/send-button-white.png";
 import homeIcon from "../../img/feed-home-icon.png";
-import searchIcon from "../../img/feed-search-icon.png";
-import postIcon from "../../img/feed-post-icon.png";
-import profileIcon from "../../img/feed-profile-icon.png";
 import postPhoto from "../../img/post-photo1-no-bg.png";
 import noHeart from "../../img/post-no-likes.png";
+import pencil from "../../img/post-edit.png";
+import trash from "../../img/post-trash.png";
 // import heart from "../../img/post-likes.png";
-import { savePost, getPosts } from "../../firebase/firestore.js";
-import { async } from "regenerator-runtime";
+import { savePost, getPosts, deletePost } from "../../firebase/firestore.js";
+// import { async } from "regenerator-runtime";
 
 const screen = `
       <section id="main-timeline">
@@ -58,16 +56,15 @@ export default async () => {
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
-    if (postPlace.value !== "") {
-      const postContainer = document.createElement("div");
-      const user = getUserInfo();
+    const postContainer = document.createElement("div");
+    const user = getUserInfo();
 
-      const date = Date.now();
-      const currentDate = new Date(date);
-      const postDate = currentDate.toLocaleDateString();
+    const date = Date.now();
+    const currentDate = new Date(date);
+    const postDate = currentDate.toLocaleDateString();
 
-      // LAYOUT DA POSTAGEM
-      const postLayout = `
+    // LAYOUT DA POSTAGEM
+    const postLayout = `
         <div class="post">
           <div class="user-info">
             <img src="${postPhoto}" alt="Foto do perfil">
@@ -77,28 +74,50 @@ export default async () => {
             </div>
           </div>
           <div class="dateAndLikes">
-            <p class="postDate">Postado em: ${postDate}</p>
+            <p class="postDate">${postDate}</p>
+            <button type="button" id="btn-delete"><img class="trash" src="${trash}" alt="Likes"></button>
+            <button type="button" id="btn-edit"><img class="edit" src="${pencil}" alt="Likes"></button>
             <p class="likesNumber">0</p>
-            <p><img class="heart" src="${noHeart}" alt="Likes"></p>
+            <button type="button" id="btn-like"><img class="heart" src="${noHeart}" alt="Likes"></button>
+            
+            <div class="modal-container id="modal-container">
+              <div class="modal">
+                <p class="question">Tem certeza de que deseja excluir?</p>
+                  <div class="btn-modal">
+                    <button class="btn-yes" id='btn-excluir'>Excluir</button>
+                    <button class="btn-no" id="btn-cancelar">Cancelar</button>
+                  </div>
+              </div>
+            </div>
+
           </div>
         </div>`;
 
-      postContainer.innerHTML = postLayout;
+    postContainer.innerHTML = postLayout;
 
-      feedContainer.appendChild(postContainer);
-      postPlace.value = "";
-    }
+    document
+      .getElementById("feed-container")
+      .insertAdjacentElement("afterbegin", postContainer);
+    postPlace.value = "";
+
+    //if para função de mostrar ou ocultar icones de editar e excluir
+    // if (  === auth().currentUser.uid) {
+    //   console.log("iguais");
+    // }
   }
 
   async function createNewPost() {
-    await savePost(postPlace.value);
-    postIt();
+    if (postPlace.value !== "") {
+      await savePost(postPlace.value);
+      postIt();
+    }
   }
 
   postButton.addEventListener("click", createNewPost);
 
-  const arrayDePosts = await getPosts();
   // EXIBIR POST DA COLEÇÃO
+  const arrayDePosts = await getPosts();
+
   function putPostsInFeed() {
     feedContainer.innerHTML = arrayDePosts
       .map(
@@ -108,18 +127,28 @@ export default async () => {
             <img src="${postPhoto}" alt="Foto do perfil">
             <div class="post-text">
               <p class="username">${post.name}</p>
+              <p class="postAuthor">${post.author}</p>
               <p class="text">${post.texto}</p>
             </div>
           </div>
           <div class="dateAndLikes">
-          <p class="postDate">Postado em: ${post.data}</p>
-          <p class="likesNumber">0</p>
-          <p><img class="heart" src="${noHeart}" alt="Likes"></p>
+            <p class="postDate">${post.data}</p>
+            <button type="button" id="btn-delete"><img class="trash" src="${trash}" alt="Likes"></button>
+            <button type="button" id="btn-edit"><img class="edit" src="${pencil}" alt="Likes"></button>
+            <p class="likesNumber">0</p>
+            <button type="button" id="btn-like"><img class="heart" src="${noHeart}" alt="Likes"></button>
           </div>
         </div>
       `
       )
       .join("");
+
+    getUserInfo();
+    console.log(auth().currentUser.uid);
+
+    // if (post.author === auth().currentUser.uid) {
+    //   console.log("iguais");
+    // }
   }
 
   putPostsInFeed();

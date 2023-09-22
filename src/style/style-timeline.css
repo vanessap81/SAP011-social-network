@@ -157,6 +157,11 @@
   padding-left: 8px;
 }
 
+#feed-container .post .post-text .postAuthor,
+#feed-container div .post .post-text .postAuthor {
+  display: none;
+}
+
 #feed-container .post .post-text .username,
 #feed-container div .post .post-text .username {
   padding-bottom: 8px;
@@ -165,6 +170,7 @@
 
 #feed-container .post .dateAndLikes {
   width: 95%;
+  height: 24px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -174,6 +180,7 @@
 
 #feed-container div .post .dateAndLikes {
   width: 100%;
+  height: 24px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -193,12 +200,45 @@
   margin-left: 70px;
 }
 
-#feed-container .post .dateAndLikes img,
-#feed-container div .post .dateAndLikes img {
+#feed-container .post .dateAndLikes button,
+#feed-container div .post .dateAndLikes button {
   width: 24px;
-  padding-right: 8px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #fff;
 }
 
+#feed-container .post .dateAndLikes button img,
+#feed-container div .post .dateAndLikes button img {
+  width: 18px;
+}
+
+#feed-container .post .dateAndLikes .modal-container,
+#feed-container div .post .dateAndLikes .modal.container {
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  overflow: auto;
+  background-color: #fff;
+  border-radius: 25px;
+  display: none;
+}
+
+#feed-container .post .dateAndLikes .modal-container .modal,
+#feed-container div .post .dateAndLikes .modal.container .modal {
+  background-color: #f9ebc7;
+  margin: 35px;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
 /* FIM FORMATAÇÃO DOS POST */
 
 #input-container {
@@ -290,9 +330,19 @@
     width: 80%;
   }
 
+  #feed-container .post .dateAndLikes,
+  #feed-container div .post .dateAndLikes {
+    justify-content: end;
+  }
+
+  #feed-container .post .dateAndLikes button,
+  #feed-container div .post .dateAndLikes button {
+    margin-right: 30px;
+  }
+
   #feed-container .post .dateAndLikes .postDate,
   #feed-container div .post .dateAndLikes .postDate {
-    margin-left: 0px;
+    margin-right: 100px;
   }
 
   #feed-container div .post .post-text {
