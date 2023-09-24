@@ -18,7 +18,7 @@
 O projeto MyPet foi desenvolvido por:
 
 * Júlia Ribeiro [GitHub](https://github.com/jumvribeiro)
-* Vanessa Ponte [GitHub] (https://github.com/vanessap81)
+* Vanessa Ponte [GitHub](https://github.com/vanessap81)
 
 * Link do projeto:
 
@@ -91,6 +91,18 @@ Para avaliar a experiência do usuário (UX) e a usabilidade da nossa aplicaçã
 Recebemos principalmente feedbacks positivos em relação à usabilidade, facilidade de uso e aparência da aplicação. Ela foi descrita como intuitiva, de fácil utilização, e o design visual recebeu elogios por ser limpo e amigável.
 
 ## 6. Prototipos 
+
+### Baixa fidelidade 
+
+<img src="https://github.com/vanessap81/SAP011-social-network/assets/87100153/96fd7194-d13b-40c9-b971-153f1ebf4c8a" height="300" />
+
+### Alta fidelidade
+
+<img src="https://github.com/vanessap81/SAP011-social-network/assets/87100153/2db6967c-888b-4032-a41a-957fdd03e511" height="300" />
+
+<img src="https://github.com/vanessap81/SAP011-social-network/assets/87100153/a304fc17-21ea-479f-8413-a081ad8ec053" height="300" />
+
+<img src="https://github.com/vanessap81/SAP011-social-network/assets/87100153/791cb718-645b-4a62-9737-ce3cee19fffb" height="300" />
 
 
 ## 7. Testes unitários
