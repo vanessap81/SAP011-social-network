@@ -64,7 +64,7 @@ export default async () => {
   // EXIBIR POST DA COLEÇÃO
   const arrayDePosts = await getPosts();
 
-  function putPostsInFeed() {
+  async function putPostsInFeed() {
     getUserInfo();
 
     feedContainer.innerHTML = arrayDePosts
@@ -103,6 +103,16 @@ export default async () => {
 
             </div>
             
+            <div class="modal-container" id="modal-container">
+              <div class="modal">
+                <p class="question">Tem certeza de que deseja excluir?</p>
+                  <div class="btn-modal">
+                    <button class="btn-yes" id='btn-excluir'>Excluir</button>
+                    <button class="btn-no" id="btn-cancelar">Cancelar</button>
+                  </div>
+              </div>
+            </div>
+
           </div>
         </div>
         `
@@ -111,6 +121,28 @@ export default async () => {
   }
 
   putPostsInFeed();
+
+  // Função curtir post
+  // const allBtnLike = document.getElementsByClassName(".btn-like");
+
+  // allBtnLike.addEventListener("click", () => {
+  //   const btnLike = document.getElementById("btn-like");
+  //   const postId = btnLike.dataset.postId;
+  //   console.log(postId);
+  //   // likeIt(postId, auth().currentUser.uid);
+  //   // post.likes.push(auth().currentUser.uid);
+  // });
+
+  // função para deletar post
+  const btnDelete = document.getElementsByClassName("btn-delete");
+
+  function openModal() {
+    const modal = document.getElementById("modal-container");
+    modal.style.display = "block";
+    console.log("funciona");
+  }
+
+  btnDelete.addEventListener("click", openModal);
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
@@ -133,14 +165,22 @@ export default async () => {
           </div>
           <div class="dateAndLikes">
             <p class="postDate">${postDate}</p>
-            <button type="button" class="btn-delete"><img class="trash" src="${trash}" alt="Apagar post"></button>
-            <button type="button" class="btn-edit"><img class="edit" src="${pencil}" alt="Editar Post"></button>
+            ${
+              post.author === auth().currentUser.uid
+                ? `
+              <button type="button" class="btn-delete" data-postid="${post.postId}"><img class="trash" src="${trash}" alt="Apagar   post"></button>
+
+              <button type="button" id="btn-edit" class="btn-edit" data-postid="${post.postId}"><img class="edit" src="${pencil}" alt="Editar   post"></button>
+            `
+                : ""
+            }
+            
             <div class="likesNumber">
               <p>0</p>
               <button type="button" id="btn-like"><img class="heart" src="${noHeart}" alt="Likes"></button>
             </div>
             
-            <div class="modal-container id="modal-container">
+            <div class="modal-container" id="modal-container">
               <div class="modal">
                 <p class="question">Tem certeza de que deseja excluir?</p>
                   <div class="btn-modal">
@@ -169,24 +209,4 @@ export default async () => {
   }
 
   postButton.addEventListener("click", createNewPost);
-
-  // Função curtir post
-  const allBtnLike = document.getElementsByClassName(".btn-like");
-
-  allBtnLike.addEventListener("click", () => {
-    const btnLike = document.getElementById("btn-like");
-    const postId = btnLike.dataset.postId;
-    console.log(postId);
-    // likeIt(postId, auth().currentUser.uid);
-    // post.likes.push(auth().currentUser.uid);
-  });
-
-  // função para deletar post
-  // function compareAndDelete() {
-
-  //   // deletePost(postId);
-  // }
-
-  // const btnDelete = document.getElementsByClassName("btn-delete");
-  // btnDelete.addEventListener("click", compareAndDelete());
 };

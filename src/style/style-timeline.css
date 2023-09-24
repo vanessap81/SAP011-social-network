@@ -190,7 +190,7 @@
 
 #feed-container .post .dateAndLikes .likesNumber,
 #feed-container div .post .dateAndLikes .likesNumber {
-  width: 60px;
+  width: 80px;
   margin: 0;
   height: 24px;
 }
@@ -344,7 +344,9 @@
 
   #feed-container .post .dateAndLikes button,
   #feed-container div .post .dateAndLikes button {
-    margin-right: 30px;
+    cursor: pointer;
+    width: 30px;
+    margin-right: 20px;
   }
 
   #feed-container .post .dateAndLikes .postDate,
