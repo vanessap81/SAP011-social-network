@@ -75,7 +75,6 @@ export default async () => {
             <img src="${postPhoto}" alt="Foto do perfil">
             <div class="post-text">
               <p class="username">${post.name}</p>
-              <p class="postAuthor">${post.author}</p>
               <p class="text">${post.texto}</p>
             </div>
           </div>
@@ -92,7 +91,7 @@ export default async () => {
             }
             <div class="likesNumber">
               
-              <button type="button" class="btn-like" data-postid="${
+              <button type="button" id="btn-like" class="btn-like" data-postid="${
                 post.postId
               }" data-postAuthor="${auth().currentUser.uid}">
                 <img ${
@@ -116,64 +115,28 @@ export default async () => {
     putPostsInFeed();
 
     const feed = document.getElementById("feed-container");
+
     feed.addEventListener("click", (event) => {
       const parentNode = event.target.parentNode;
-      // console.log(parentNode);
       const postId = parentNode.getAttribute("data-postid");
-      // console.log(postId);
-      deletePost(postId);
-      const post = document.getElementById("post");
-      post.remove();
+      const postAuthor = auth().currentUser.uid;
+      const clickedBtn = parentNode.getAttribute("id");
+      // console.log(event.target.parentNode);
+      // console.log(btnDeletar);
+
+      if (clickedBtn === "btn-delete") {
+        deletePost(postId);
+        const post = document.getElementById("post");
+        post.remove();
+      }
+
+      if (clickedBtn === "btn-like") {
+        likeIt(postId, postAuthor);
+      }
     });
-
-    // const btnDelete = document.querySelector(".btn-delete");
-    // btnDelete.addEventListener("click", (event) => {
-    //   const postId = btnDelete.getAttribute("data-postid");
-    //   console.log(postId);
-    //   console.log(event.target.parentNode);
-    // });
-
-    // const allBtnLike = document.querySelector(".btn-like");
-
-    // allBtnLike.addEventListener("click", () => {
-    //   const postId = document.getAttribute("data-postid");
-    //   console.log(postId);
-    // });
-
-    // allBtnLike.addEventListener("click", () => {
-    //   const postAuthor = document.getAttribute("data-postAuthor");
-    //   console.log(postAuthor);
-    // });
   }
 
-  // likeIt(postId, auth().currentUser.uid);
-  // post.likes.push(auth().currentUser.uid);
-
   postFunctions();
-
-  // function loadThis() {
-  //   const btnDel = document.getElementById("btn-delete");
-  //   function openModal() {
-  //     const modal = document.getElementById("modal-container");
-  //     modal.style.display = "block";
-  //     console.log("funciona");
-  //   }
-  //   btnDel.addEventListener("click", openModal);
-  // }
-  // loadThis();
-
-  // Função curtir post
-  // const allBtnLike = document.getElementsByClassName(".btn-like");
-
-  // allBtnLike.addEventListener("click", () => {
-  //   const btnLike = document.getElementById("btn-like");
-  //   const postId = btnLike.dataset.postId;
-  //   console.log(postId);
-  //   // likeIt(postId, auth().currentUser.uid);
-  //   // post.likes.push(auth().currentUser.uid);
-  // });
-
-  // função para deletar post
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
@@ -205,15 +168,14 @@ export default async () => {
             `
                 : ""
             }
-            
             <div class="likesNumber">
               
               <button type="button" class="btn-like" data-postid="${
                 user.postId
               }" data-postAuthor="${auth().currentUser.uid}">
-                <img class="heart" alt="Likes">
+                <img class="heart" src="${noHeart}" alt="Likes">
               </button>
-              <p>${user.likes.length}</p>
+              <p>0</p>
 
           </div>
         </div>`;
