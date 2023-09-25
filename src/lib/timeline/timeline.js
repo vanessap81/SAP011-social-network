@@ -64,13 +64,13 @@ export default async () => {
   // EXIBIR POST DA COLEÇÃO
   const arrayDePosts = await getPosts();
 
-  async function putPostsInFeed() {
+  function putPostsInFeed() {
     getUserInfo();
 
     feedContainer.innerHTML = arrayDePosts
       .map(
         (post) => `
-        <div class="post">
+        <div class="post" id="post">
           <div class="user-info">
             <img src="${postPhoto}" alt="Foto do perfil">
             <div class="post-text">
@@ -84,7 +84,7 @@ export default async () => {
             ${
               post.author === auth().currentUser.uid
                 ? `
-              <button type="button" class="btn-delete" data-postid="${post.postId}"><img class="trash" src="${trash}" alt="Apagar   post"></button>
+              <button type="button" id="btn-delete" class="btn-delete" data-postid="${post.postId}"><img class="trash" src="${trash}" alt="Apagar   post"></button>
 
               <button type="button" id="btn-edit" class="btn-edit" data-postid="${post.postId}"><img class="edit" src="${pencil}" alt="Editar   post"></button>
             `
@@ -92,7 +92,9 @@ export default async () => {
             }
             <div class="likesNumber">
               
-              <button type="button" class="btn-like">
+              <button type="button" class="btn-like" data-postid="${
+                post.postId
+              }" data-postAuthor="${auth().currentUser.uid}">
                 <img ${
                   post.likes.includes(auth().currentUser.uid)
                     ? `src="${heart}"`
@@ -102,16 +104,6 @@ export default async () => {
               <p>${post.likes.length}</p>
 
             </div>
-            
-            <div class="modal-container" id="modal-container">
-              <div class="modal">
-                <p class="question">Tem certeza de que deseja excluir?</p>
-                  <div class="btn-modal">
-                    <button class="btn-yes" id='btn-excluir'>Excluir</button>
-                    <button class="btn-no" id="btn-cancelar">Cancelar</button>
-                  </div>
-              </div>
-            </div>
 
           </div>
         </div>
@@ -120,7 +112,55 @@ export default async () => {
       .join("");
   }
 
-  putPostsInFeed();
+  async function postFunctions() {
+    putPostsInFeed();
+
+    const feed = document.getElementById("feed-container");
+    feed.addEventListener("click", (event) => {
+      const parentNode = event.target.parentNode;
+      // console.log(parentNode);
+      const postId = parentNode.getAttribute("data-postid");
+      // console.log(postId);
+      deletePost(postId);
+      const post = document.getElementById("post");
+      post.remove();
+    });
+
+    // const btnDelete = document.querySelector(".btn-delete");
+    // btnDelete.addEventListener("click", (event) => {
+    //   const postId = btnDelete.getAttribute("data-postid");
+    //   console.log(postId);
+    //   console.log(event.target.parentNode);
+    // });
+
+    // const allBtnLike = document.querySelector(".btn-like");
+
+    // allBtnLike.addEventListener("click", () => {
+    //   const postId = document.getAttribute("data-postid");
+    //   console.log(postId);
+    // });
+
+    // allBtnLike.addEventListener("click", () => {
+    //   const postAuthor = document.getAttribute("data-postAuthor");
+    //   console.log(postAuthor);
+    // });
+  }
+
+  // likeIt(postId, auth().currentUser.uid);
+  // post.likes.push(auth().currentUser.uid);
+
+  postFunctions();
+
+  // function loadThis() {
+  //   const btnDel = document.getElementById("btn-delete");
+  //   function openModal() {
+  //     const modal = document.getElementById("modal-container");
+  //     modal.style.display = "block";
+  //     console.log("funciona");
+  //   }
+  //   btnDel.addEventListener("click", openModal);
+  // }
+  // loadThis();
 
   // Função curtir post
   // const allBtnLike = document.getElementsByClassName(".btn-like");
@@ -134,15 +174,6 @@ export default async () => {
   // });
 
   // função para deletar post
-  const btnDelete = document.getElementsByClassName("btn-delete");
-
-  function openModal() {
-    const modal = document.getElementById("modal-container");
-    modal.style.display = "block";
-    console.log("funciona");
-  }
-
-  btnDelete.addEventListener("click", openModal);
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
@@ -166,29 +197,23 @@ export default async () => {
           <div class="dateAndLikes">
             <p class="postDate">${postDate}</p>
             ${
-              post.author === auth().currentUser.uid
+              user.author === auth().currentUser.uid
                 ? `
-              <button type="button" class="btn-delete" data-postid="${post.postId}"><img class="trash" src="${trash}" alt="Apagar   post"></button>
+              <button type="button" class="btn-delete" data-postid="${user.postId}"><img class="trash" src="${trash}" alt="Apagar   post"></button>
 
-              <button type="button" id="btn-edit" class="btn-edit" data-postid="${post.postId}"><img class="edit" src="${pencil}" alt="Editar   post"></button>
+              <button type="button" id="btn-edit" class="btn-edit" data-postid="${user.postId}"><img class="edit" src="${pencil}" alt="Editar   post"></button>
             `
                 : ""
             }
             
             <div class="likesNumber">
-              <p>0</p>
-              <button type="button" id="btn-like"><img class="heart" src="${noHeart}" alt="Likes"></button>
-            </div>
-            
-            <div class="modal-container" id="modal-container">
-              <div class="modal">
-                <p class="question">Tem certeza de que deseja excluir?</p>
-                  <div class="btn-modal">
-                    <button class="btn-yes" id='btn-excluir'>Excluir</button>
-                    <button class="btn-no" id="btn-cancelar">Cancelar</button>
-                  </div>
-              </div>
-            </div>
+              
+              <button type="button" class="btn-like" data-postid="${
+                user.postId
+              }" data-postAuthor="${auth().currentUser.uid}">
+                <img class="heart" alt="Likes">
+              </button>
+              <p>${user.likes.length}</p>
 
           </div>
         </div>`;
