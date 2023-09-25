@@ -3,10 +3,9 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  GoogleAuthProvider,
   signInWithPopup,
   signOut,
- } from "firebase/auth";
+  } from "firebase/auth";
 
 import { 
   signIn,
