@@ -1,16 +1,16 @@
-import { exit, getUserInfo } from "../../firebase/auth.js";
+import { exit, getUserInfo } from '../../firebase/auth.js';
 // import meme from "../../img/angry-cat.gif";
-import feedLogo from "../../img/logo-top-timeline.png";
-import exitIcon from "../../img/exit-icon.png";
-import sendIcon from "../../img/send-button-white.png";
-import homeIcon from "../../img/feed-home-icon.png";
-import searchIcon from "../../img/feed-search-icon.png";
-import postIcon from "../../img/feed-post-icon.png";
-import profileIcon from "../../img/feed-profile-icon.png";
-import postPhoto from "../../img/post-photo1-no-bg.png";
-import noHeart from "../../img/post-no-likes.png";
+import feedLogo from '../../img/logo-top-timeline.png';
+import exitIcon from '../../img/exit-icon.png';
+import sendIcon from '../../img/send-button-white.png';
+import homeIcon from '../../img/feed-home-icon.png';
+import searchIcon from '../../img/feed-search-icon.png';
+import postIcon from '../../img/feed-post-icon.png';
+import profileIcon from '../../img/feed-profile-icon.png';
+import postPhoto from '../../img/post-photo1-no-bg.png';
+import noHeart from '../../img/post-no-likes.png';
 // import heart from "../../img/post-likes.png";
-import { savePost } from "../../firebase/firestore.js";
+import { savePost } from '../../firebase/firestore.js';
 
 const screen = `
       <section id="main-timeline">
@@ -48,26 +48,26 @@ const screen = `
       </section>`;
 
 export default () => {
-  const container = document.getElementById("app");
+  const container = document.getElementById('app');
   container.innerHTML = screen;
 
-  const exitBtn = document.getElementById("signout-button");
-  exitBtn.addEventListener("click", exit);
+  const exitBtn = document.getElementById('signout-button');
+  exitBtn.addEventListener('click', exit);
 
-  const backToTop = document.querySelector("#home-button");
-  const feed = document.querySelector("#feed-container");
-  backToTop.addEventListener("click", function () {
+  const backToTop = document.querySelector('#home-button');
+  const feed = document.querySelector('#feed-container');
+  backToTop.addEventListener('click', () => {
     feed.scrollTo(0, 0);
   });
 
-  const postButton = document.getElementById("publish-button");
-  const postPlace = document.getElementById("postPlace");
-  const feedContainer = document.getElementById("feed-container");
+  const postButton = document.getElementById('publish-button');
+  const postPlace = document.getElementById('postPlace');
+  const feedContainer = document.getElementById('feed-container');
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
-    if (postPlace.value !== "") {
-      const postContainer = document.createElement("div");
+    if (postPlace.value !== '') {
+      const postContainer = document.createElement('div');
       const user = getUserInfo();
 
       const date = Date.now();
@@ -93,7 +93,7 @@ export default () => {
       postContainer.innerHTML = postLayout;
 
       feedContainer.appendChild(postContainer);
-      postPlace.value = "";
+      postPlace.value = '';
     }
   }
 
@@ -102,5 +102,5 @@ export default () => {
     postIt();
   }
 
-  postButton.addEventListener("click", createNewPost);
+  postButton.addEventListener('click', createNewPost);
 };

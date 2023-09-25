@@ -1,6 +1,6 @@
-import { collection, addDoc } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-import { db, app } from "./config.js";
+import { collection, addDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { db, app } from './config.js';
 
 const auth = () => getAuth(app);
 
@@ -17,7 +17,7 @@ async function savePost(postText) {
     data: postDate,
   };
 
-  const docRef = await addDoc(collection(db, "posts"), post);
+  const docRef = await addDoc(collection(db, 'posts'), post);
   post.id = docRef.id;
   return post;
 }

@@ -1,7 +1,7 @@
-import { signIn, signGoogle, checkLogin } from "../../firebase/auth.js";
-import logo from "../../img/logo-login.png";
-import ball from "../../img/purple-ball.png";
-import girl from "../../img/girl-image.png";
+import { signIn, signGoogle, checkLogin } from '../../firebase/auth.js';
+import logo from '../../img/logo-login.png';
+import ball from '../../img/purple-ball.png';
+import girl from '../../img/girl-image.png';
 
 const screen = `
       <section id="main-login">
@@ -47,11 +47,11 @@ const screen = `
 `;
 
 export default () => {
-  const content = document.getElementById("app");
+  const content = document.getElementById('app');
   content.innerHTML = screen;
 
-  const emailId = document.getElementById("emailId");
-  const passwordId = document.getElementById("passwordId");
+  const emailId = document.getElementById('emailId');
+  const passwordId = document.getElementById('passwordId');
 
   async function captureData(event) {
     event.preventDefault();
@@ -61,20 +61,20 @@ export default () => {
 
     await signIn(emailUser, passwordUser);
     if (checkLogin === true) {
-      location.hash = "timeline";
+      window.location.hash = 'timeline';
     }
   }
 
-  const submit = document.getElementById("submit");
-  submit.addEventListener("click", captureData);
+  const submit = document.getElementById('submit');
+  submit.addEventListener('click', captureData);
 
   async function signInGoogle(event) {
     event.preventDefault();
 
     await signGoogle();
-    location.hash = "#timeline";
+    window.location.hash = '#timeline';
   }
 
-  const loginGoogle = document.getElementById("loginGoogle");
-  loginGoogle.addEventListener("click", signInGoogle);
+  const loginGoogle = document.getElementById('loginGoogle');
+  loginGoogle.addEventListener('click', signInGoogle);
 };

@@ -1,28 +1,28 @@
-import login from "./lib/login/login.js";
-import register from "./lib/register/register.js";
-import welcome from "./lib/welcome/welcome.js";
-import timeline from "./lib/timeline/timeline.js";
-import reset from "./lib/reset/reset.js";
-import newpassword from "./lib/newpassword/newpassword.js";
-import { checkLogin } from "./firebase/auth.js";
+import login from './lib/login/login.js';
+import register from './lib/register/register.js';
+import welcome from './lib/welcome/welcome.js';
+import timeline from './lib/timeline/timeline.js';
+import reset from './lib/reset/reset.js';
+import newpassword from './lib/newpassword/newpassword.js';
+import { checkLogin } from './firebase/auth.js';
 
 function loadContent() {
-  const fragmentId = location.hash.substring(1);
-  console.log(fragmentId);
+  const fragmentId = window.location.hash.substring(1);
+  // console.log(fragmentId);
   switch (fragmentId) {
-    case "register":
+    case 'register':
       register();
       break;
-    case "reset":
+    case 'reset':
       reset();
       break;
-    case "newpassword":
+    case 'newpassword':
       newpassword();
       break;
-    case "welcome":
+    case 'welcome':
       welcome();
       break;
-    case "timeline":
+    case 'timeline':
       timeline();
       break;
     default:
@@ -30,10 +30,10 @@ function loadContent() {
   }
 }
 
-if (!location.hash) {
-  location.hash = "#login";
+if (!window.location.hash) {
+  window.location.hash = '#login';
 }
 
 checkLogin();
 loadContent();
-window.addEventListener("hashchange", loadContent);
+window.addEventListener('hashchange', loadContent);
