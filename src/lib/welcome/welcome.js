@@ -1,7 +1,7 @@
-import welcomePerson from "../../img/person-in-ball.png";
+import welcomePerson from '../../img/person-in-ball.png';
 
 export default () => {
-  const container = document.getElementById("app");
+  const container = document.getElementById('app');
   const screen = `
   <section id="main-welcome">
         <h1>Boas-vindas!</h1>

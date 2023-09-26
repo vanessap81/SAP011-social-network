@@ -1,6 +1,6 @@
-import { createUser } from "../../firebase/auth";
-import profile from "../../img/photo-profile.png";
-import ball from "../../img/purple-ball.png";
+import { createUser } from '../../firebase/auth';
+import profile from '../../img/photo-profile.png';
+import ball from '../../img/purple-ball.png';
 
 const screen = `
         <section id="main-register">
@@ -47,12 +47,12 @@ const screen = `
         `;
 
 export default () => {
-  const container = document.getElementById("app");
+  const container = document.getElementById('app');
   container.innerHTML = screen;
 
-  const nameId = document.getElementById("nameId");
-  const emailId = document.getElementById("emailId");
-  const passwordId = document.getElementById("passwordId");
+  const nameId = document.getElementById('nameId');
+  const emailId = document.getElementById('emailId');
+  const passwordId = document.getElementById('passwordId');
 
   async function captureData(event) {
     event.preventDefault();
@@ -62,9 +62,9 @@ export default () => {
     const passwordUser = passwordId.value;
 
     await createUser(nameUser, emailUser, passwordUser);
-    location.hash = "#welcome";
+    window.location.hash = '#welcome';
   }
 
-  const submit = document.getElementById("submit");
-  submit.addEventListener("click", captureData);
+  const submit = document.getElementById('submit');
+  submit.addEventListener('click', captureData);
 };

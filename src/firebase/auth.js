@@ -8,16 +8,17 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
-} from "firebase/auth";
+} from 'firebase/auth';
 
-import { app } from "./config.js";
+import { app } from './config.js';
 
 const auth = () => getAuth(app);
 
 async function createUser(name, email, password) {
-  await createUserWithEmailAndPassword(auth(), email, password)
+  const auth1 = getAuth(app);
+  await createUserWithEmailAndPassword(auth1, email, password)
     .then(() => {
-      updateProfile(auth().currentUser, {
+      updateProfile(auth1.currentUser, {
         displayName: name,
         // photoURL:
       });
@@ -28,13 +29,14 @@ async function createUser(name, email, password) {
 }
 
 function checkLogin() {
-  onAuthStateChanged(auth(), (user) => {
+  return onAuthStateChanged(auth(), (user) => {
     if (user) {
-      // window.location.href = "#timeline";
-      // console.log("usuário logado");
-    } else {
-      window.location.href = "#login";
+      // window.window.location.href = "#timeline";
+      // console.log('usuário logado');
+      return true;
     }
+    window.window.location.href = '#login';
+    return false;
   });
 }
 
@@ -43,41 +45,69 @@ function getUserInfo() {
 }
 
 async function signIn(email, password) {
-  await signInWithEmailAndPassword(auth(), email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-  //location.hash = "#timeline";
+  await signInWithEmailAndPassword(auth(), email, password);
+  // .then((userCredential) => {
+  // const user = userCredential.user;
+  // ...
 }
+//  .catch((error) => {
+// const errorCode = error.code;
+// const errorMessage = error.message;
+// });
+// window.location.hash = "#timeline";
+// }
 
 const provider = new GoogleAuthProvider();
 
 async function signGoogle() {
-  await signInWithPopup(auth(), provider)
-    .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const user = result.user;
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const credential = GoogleAuthProvider.credentialFromError(error);
-    });
+  await signInWithPopup(auth(), provider);
+  //  .then((result) => {
+  //    const credential = GoogleAuthProvider.credentialFromResult(result);
+  // const token = credential.accessToken;
+  // const user = result.user;
+  //  })
+  // .catch((error) => {
+  // const errorCode = error.code;
+  // const errorMessage = error.message;
+  // const credential = GoogleAuthProvider.credentialFromError(error);
 }
+// Caso não exista cria o usuário na collection
+// Chamar getDoc e setDoc do firebase
+// const userData = await getDoc(doc(db, "users", auth.currentUser.uid));
+// if (!userData.exists()) {
+//   const userGoogle = {
+//     email: auth.currentUser.email,
+//     nome: auth.currentUser.displayName,
+//   };
+
+//   await setDoc(doc(db, "users", auth.currentUser.uid), userGoogle);
+//   console.log("usuarioCriado");
+// }
+// }
 
 async function resetLink(email) {
-  await sendPasswordResetEmail(auth(), email);
+  await sendPasswordResetEmail(auth(), email)
+    .then(() => {
+      // Password reset email sent!
+      // ..
+    });
+  // .catch((error) => {
+  // const errorCode = error.code;
+  // const errorMessage = error.message;
+  // ..
+  //   });
+  // window.location.hash = "#login";
 }
 
 async function exit() {
-  await signOut(auth());
-  location.hash = "#login";
+  await signOut(auth())
+    .then(() => {
+      // Sign-out successful.
+    });
+  // .catch((error) => {
+  // An error happened.
+  // });
+  window.location.hash = '#login';
 }
 
 export {

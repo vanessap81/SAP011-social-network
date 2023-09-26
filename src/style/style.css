@@ -67,7 +67,6 @@ main {
   height: 35px;
   border: none;
   align-self: center;
-  margin-top: 40px;
   border-radius: 10px;
   color: #fff;
   text-decoration: none;
@@ -78,6 +77,11 @@ main {
   padding-top: 6px;
   margin-top: 12rem;
   margin-bottom: 3rem;
+}
+
+footer p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8em;
 }
 
 #main-register p {
@@ -159,9 +163,9 @@ main {
   display: none;
 }
 
-#main-welcome #toTimeline {
+/* #main-welcome #toTimeline {
   width: 200px;
-}
+} */
 
 #main-welcome #purple-ball img {
   width: 320px;
@@ -207,11 +211,6 @@ main {
   color: #fff;
   font-weight: bold;
   background-color: #33bbc5;
-}
-
-footer p {
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.8em;
 }
 
 @media (min-width: 1024px) {

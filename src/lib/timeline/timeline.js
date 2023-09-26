@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { exit, auth, getUserInfo } from "../../firebase/auth.js";
 
 import {
@@ -17,6 +18,21 @@ import noHeart from "../../img/post-no-likes.png";
 import heart from "../../img/post-likes.png";
 import pencil from "../../img/post-edit.png";
 import trash from "../../img/post-trash.png";
+=======
+import { exit, getUserInfo } from '../../firebase/auth.js';
+// import meme from "../../img/angry-cat.gif";
+import feedLogo from '../../img/logo-top-timeline.png';
+import exitIcon from '../../img/exit-icon.png';
+import sendIcon from '../../img/send-button-white.png';
+import homeIcon from '../../img/feed-home-icon.png';
+import searchIcon from '../../img/feed-search-icon.png';
+import postIcon from '../../img/feed-post-icon.png';
+import profileIcon from '../../img/feed-profile-icon.png';
+import postPhoto from '../../img/post-photo1-no-bg.png';
+import noHeart from '../../img/post-no-likes.png';
+// import heart from "../../img/post-likes.png";
+import { savePost } from '../../firebase/firestore.js';
+>>>>>>> t009b
 
 const screen = `
       <section id="main-timeline">
@@ -44,22 +60,33 @@ const screen = `
 
       </section>`;
 
+<<<<<<< HEAD
 export default async () => {
   const container = document.getElementById("app");
+=======
+export default () => {
+  const container = document.getElementById('app');
+>>>>>>> t009b
   container.innerHTML = screen;
 
-  const exitBtn = document.getElementById("signout-button");
-  exitBtn.addEventListener("click", exit);
+  const exitBtn = document.getElementById('signout-button');
+  exitBtn.addEventListener('click', exit);
 
+<<<<<<< HEAD
   const backToTop = document.querySelector("#home-button");
   const feed = document.querySelector("#feed-container");
   backToTop.addEventListener("click", () => {
+=======
+  const backToTop = document.querySelector('#home-button');
+  const feed = document.querySelector('#feed-container');
+  backToTop.addEventListener('click', () => {
+>>>>>>> t009b
     feed.scrollTo(0, 0);
   });
 
-  const postButton = document.getElementById("publish-button");
-  const postPlace = document.getElementById("postPlace");
-  const feedContainer = document.getElementById("feed-container");
+  const postButton = document.getElementById('publish-button');
+  const postPlace = document.getElementById('postPlace');
+  const feedContainer = document.getElementById('feed-container');
 
   // EXIBIR POST DA COLEÇÃO
   const arrayDePosts = await getPosts();
@@ -147,8 +174,14 @@ export default async () => {
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
+<<<<<<< HEAD
     const postContainer = document.createElement("div");
     const user = getUserInfo();
+=======
+    if (postPlace.value !== '') {
+      const postContainer = document.createElement('div');
+      const user = getUserInfo();
+>>>>>>> t009b
 
     const date = Date.now();
     const currentDate = new Date(date);
@@ -189,11 +222,17 @@ export default async () => {
 
     postContainer.innerHTML = postLayout;
 
+<<<<<<< HEAD
     document
       .getElementById("feed-container")
       .insertAdjacentElement("afterbegin", postContainer);
 
     postPlace.value = "";
+=======
+      feedContainer.appendChild(postContainer);
+      postPlace.value = '';
+    }
+>>>>>>> t009b
   }
 
   async function createNewPost() {
@@ -203,5 +242,5 @@ export default async () => {
     }
   }
 
-  postButton.addEventListener("click", createNewPost);
+  postButton.addEventListener('click', createNewPost);
 };

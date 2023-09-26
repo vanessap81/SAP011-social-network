@@ -30,7 +30,7 @@ async function savePost(postText) {
     data: postDate,
   };
 
-  const docRef = await addDoc(collection(db, "posts"), post);
+  const docRef = await addDoc(collection(db, 'posts'), post);
   post.id = docRef.id;
   return post;
 }

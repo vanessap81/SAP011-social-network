@@ -3,20 +3,18 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  GoogleAuthProvider,
   signInWithPopup,
   signOut,
- } from "firebase/auth";
+} from 'firebase/auth';
 
-import { 
+import {
   signIn,
   signGoogle,
   createUser,
   resetLink,
- } from "../src/firebase/auth.js";
+} from '../src/firebase/auth.js';
 
-
-jest.mock("firebase/auth");
+jest.mock('firebase/auth');
 
 describe('Criar Usuario', () => {
   it('cria uma conta do usuário utilizando o email e senha', async () => {
@@ -31,8 +29,6 @@ describe('Criar Usuario', () => {
     await createUser(email, password, displayName);
 
     expect(createUserWithEmailAndPassword).toHaveBeenCalledTimes(1);
-    
-  
   });
 });
 
@@ -56,8 +52,7 @@ describe('signOut', () => {
 
 describe('signInGoogle', () => {
   it('Login com Google account', async () => {
- 
-     signInWithPopup.mockResolvedValueOnce();
+    signInWithPopup.mockResolvedValueOnce();
 
     await signGoogle();
 

@@ -1,5 +1,5 @@
-import logo from "../../img/logo-login.png";
-import ball from "../../img/purple-ball.png";
+import logo from '../../img/logo-login.png';
+import ball from '../../img/purple-ball.png';
 
 const screen = `
       <section id="main-newpassword">
@@ -41,13 +41,13 @@ const screen = `
       </section>`;
 
 export default () => {
-  const content = document.getElementById("app");
+  const content = document.getElementById('app');
   content.innerHTML = screen;
-
-  const submit = document.getElementById("submit");
-  submit.addEventListener("click", newPassword);
 
   function newPassword(event) {
     event.preventDefault();
   }
+
+  const submit = document.getElementById('submit');
+  submit.addEventListener('click', newPassword);
 };

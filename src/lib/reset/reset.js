@@ -1,6 +1,6 @@
-import { resetLink } from "../../firebase/auth.js";
-import logo from "../../img/logo-login.png";
-import ball from "../../img/purple-ball.png";
+import { resetLink } from '../../firebase/auth.js';
+import logo from '../../img/logo-login.png';
+import ball from '../../img/purple-ball.png';
 
 const screen = `
       <section id="main-reset">
@@ -39,18 +39,18 @@ const screen = `
     `;
 
 export default () => {
-  const content = document.getElementById("app");
+  const content = document.getElementById('app');
   content.innerHTML = screen;
 
-  const emailUser = document.getElementById("email");
+  const emailUser = document.getElementById('email');
 
   function newPassword(event) {
     event.preventDefault();
     const emailValue = emailUser.value;
 
-    resetLink(emailValue).then((location.hash = "#login"));
+    resetLink(emailValue).then((window.location.hash = '#login'));
   }
 
-  const btn = document.getElementById("submit");
-  btn.addEventListener("click", newPassword);
+  const btn = document.getElementById('submit');
+  btn.addEventListener('click', newPassword);
 };
