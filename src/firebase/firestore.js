@@ -9,6 +9,7 @@ import {
   arrayUnion,
   arrayRemove,
   deleteDoc,
+  onSnapshot,
 } from "firebase/firestore";
 
 import { getAuth } from "firebase/auth";
@@ -34,8 +35,32 @@ async function savePost(postText) {
   return post;
 }
 
+// const q = query(collection(db, "cities"), where("state", "==", "CA"));
+// const unsubscribe = onSnapshot(q, (querySnapshot) => {
+//   const cities = [];
+//   querySnapshot.forEach((doc) => {
+//       cities.push(doc.data().name);
+//   });
+//   console.log("Current cities in CA: ", cities.join(", "));
+// });
+
+// async function getPosts(savePost) {
+//   const postOrder = query(collection(db, "posts"), orderBy("data", "desc"));
+
+//   onSnapshot(postOrder, (querySnapshot) => {
+//     const postsInFirebase = [];
+//     querySnapshot.forEach((doc) => {
+//       const collection = doc.data();
+//       collection.postId = doc.id;
+//       postsInFirebase.push(collection);
+//     });
+//     savePost(collection);
+//   });
+// }
+
 async function getPosts() {
   const postOrder = query(collection(db, "posts"), orderBy("data", "desc"));
+
   const querySnapshot = await getDocs(postOrder);
   const postsInFirebase = [];
   querySnapshot.forEach((doc) => {
@@ -43,12 +68,9 @@ async function getPosts() {
     collection.postId = doc.id;
     postsInFirebase.push(collection);
   });
-  // console.log(postsInFirebase[0]);
-  // console.log(`Post Id: ${postsInFirebase[0].postId}`);
   return postsInFirebase;
 }
 
-// EM CONSTRUÇÃO
 function deletePost(postId) {
   const postRef = doc(db, "posts", postId);
   deleteDoc(postRef);

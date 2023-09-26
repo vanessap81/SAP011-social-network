@@ -27,6 +27,7 @@ const screen = `
             required
             name="password"
           />
+          <p>No mínimo 6 dígitos</p>
           <input id="submit" type="submit" class="login" value="Login" />
         </form>
   

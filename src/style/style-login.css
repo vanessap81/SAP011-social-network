@@ -83,7 +83,7 @@ main {
 #main-reset #form-container,
 #main-login #form-container {
     width: 80%;
-    height: 400px;
+    height: 420px;
     border-radius: 25px;
     align-self: center;
     display: flex;
@@ -137,6 +137,11 @@ main {
     color: grey;
     margin: 0.7em 0;
     text-transform: uppercase;
+}
+
+#main-login #form-container form p {
+    margin: 4px 0 0 0;
+    text-align: start;
 }
 
 #main-newpassword .input,
