@@ -148,7 +148,6 @@
   /* border: solid 1px red; */
 }
 
-#feed-container .post .user-info img,
 #input-container button img {
   width: 100%;
 }
@@ -158,6 +157,7 @@
   height: 32px;
 }
 
+#feed-container .post .user-info img,
 #feed-container div .post .user-info img {
   width: 45px;
   margin-top: 5px;
