@@ -23,7 +23,7 @@ function loadContent() {
       welcome();
       break;
     case "timeline":
-      await timeline();
+      timeline();
       break;
     default:
       login();
