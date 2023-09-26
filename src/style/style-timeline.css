@@ -23,6 +23,20 @@
   margin-bottom: 10px;
 }
 
+#input-container button {
+  width: 10%;
+  height: 30px;
+  border-color: #D0D4CE;
+  background-color: #fff;
+  align-self: self-start;
+  /* border-left: none; */
+}
+
+#functions button {
+  background-color: #33bbc5;
+  border: none;
+}
+
 #main-timeline #div-logo button {
   border: none;
   background-color: #FBE5C8;
@@ -114,6 +128,15 @@
   /* border: solid 1px red; */
 }
 
+#input-container button img {
+  width: 100%;
+}
+
+#functions button img,
+#functions a img {
+  height: 32px;
+}
+
 #feed-container div .post .user-info img {
   width: 45px;
   margin-top: 5px;
@@ -183,19 +206,6 @@
   /* border-radius: 5px; */
 }
 
-#input-container button {
-  width: 10%;
-  height: 30px;
-  border-color: #D0D4CE;
-  background-color: #fff;
-  align-self: self-start;
-  /* border-left: none; */
-}
-
-#input-container button img {
-  width: 100%;
-}
-
 #functions {
   width: 100%;
   height: 7%;
@@ -210,16 +220,6 @@
   background-color: #33bbc5;
   border-top: 2px solid #fff;
   padding: 0 20px;
-}
-
-#functions button {
-  background-color: #33bbc5;
-  border: none;
-}
-
-#functions button img,
-#functions a img {
-  height: 32px;
 }
 
 @media (min-width: 1024px) {

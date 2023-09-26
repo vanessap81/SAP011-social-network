@@ -66,6 +66,10 @@ main {
     margin-bottom: 5px;
 }
 
+#form-container p {
+    margin: 10px 0 10px 0;
+}
+
 #main-newpassword #form-container p,
 #main-reset  #form-container  p {
     text-align: center;
@@ -98,10 +102,6 @@ main {
 #main-newpassword #form-container,
 #main-reset #form-container {
     margin-top: 80px;
-}
-
-#form-container p {
-    margin: 10px 0 10px 0;
 }
 
 #main-login #form-container p a {
@@ -272,14 +272,14 @@ main {
         padding-top: 40px;
     }  
 
-    #main-login #form-container #submit {
-        width: 200px;
-    }
-
     #main-newpassword #submit,
     #main-reset #submit,
     #main-login #toRegister,
     #main-login #loginGoogle {
+        width: 200px;
+    }
+
+    #main-login #form-container #submit {
         width: 200px;
     }
 

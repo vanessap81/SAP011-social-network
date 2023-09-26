@@ -79,6 +79,11 @@ main {
   margin-bottom: 3rem;
 }
 
+footer p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8em;
+}
+
 #main-register p {
   text-align: center;
   font-family: "DM Sans", sans-serif;
@@ -158,9 +163,9 @@ main {
   display: none;
 }
 
-#main-welcome #toTimeline {
+/* #main-welcome #toTimeline {
   width: 200px;
-}
+} */
 
 #main-welcome #purple-ball img {
   width: 320px;
@@ -206,11 +211,6 @@ main {
   color: #fff;
   font-weight: bold;
   background-color: #33bbc5;
-}
-
-footer p {
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.8em;
 }
 
 @media (min-width: 1024px) {
