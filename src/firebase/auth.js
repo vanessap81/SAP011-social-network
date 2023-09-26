@@ -31,7 +31,7 @@ function checkLogin() {
   onAuthStateChanged(auth(), (user) => {
     if (user) {
       // window.location.href = "#timeline";
-      console.log("usuário logado");
+      // console.log("usuário logado");
     } else {
       window.location.href = "#login";
     }

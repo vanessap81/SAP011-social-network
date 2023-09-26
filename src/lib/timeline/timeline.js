@@ -1,13 +1,5 @@
 import { exit, auth, getUserInfo } from "../../firebase/auth.js";
-import feedLogo from "../../img/logo-top-timeline.png";
-import exitIcon from "../../img/exit-icon.png";
-import sendIcon from "../../img/send-button-white.png";
-import homeIcon from "../../img/feed-home-icon.png";
-import postPhoto from "../../img/post-photo1-no-bg.png";
-import noHeart from "../../img/post-no-likes.png";
-import pencil from "../../img/post-edit.png";
-import trash from "../../img/post-trash.png";
-import heart from "../../img/post-likes.png";
+
 import {
   savePost,
   getPosts,
@@ -15,8 +7,16 @@ import {
   likeIt,
   disLikeIt,
 } from "../../firebase/firestore.js";
-import { doc } from "firebase/firestore";
-// import { async } from "regenerator-runtime";
+
+import feedLogo from "../../img/logo-top-timeline.png";
+import exitIcon from "../../img/exit-icon.png";
+import sendIcon from "../../img/send-button-white.png";
+import homeIcon from "../../img/feed-home-icon.png";
+import postPhoto from "../../img/post-photo1-no-bg.png";
+import noHeart from "../../img/post-no-likes.png";
+import heart from "../../img/post-likes.png";
+import pencil from "../../img/post-edit.png";
+import trash from "../../img/post-trash.png";
 
 const screen = `
       <section id="main-timeline">
@@ -28,13 +28,13 @@ const screen = `
         </div>
 
           <div id="feed">
+            <div id="feed-container">
+          </div>
 
-            <div id="feed-container"></div>
-
-            <div id="input-container">
-              <input type="text" name="post" placeholder="Publique algo" id="postPlace"/>
-              <button id="publish-button" type="button"><img src="${sendIcon}" alt="Send Button"></button>
-            </div>
+          <div id="input-container">
+            <input type="text" name="post" placeholder="Publique algo" id="postPlace"/>
+            <button id="publish-button" type="button"><img src="${sendIcon}" alt="Send Button"></button>
+          </div>
 
           </div>
 
@@ -53,7 +53,7 @@ export default async () => {
 
   const backToTop = document.querySelector("#home-button");
   const feed = document.querySelector("#feed-container");
-  backToTop.addEventListener("click", function () {
+  backToTop.addEventListener("click", () => {
     feed.scrollTo(0, 0);
   });
 
@@ -64,7 +64,7 @@ export default async () => {
   // EXIBIR POST DA COLEÇÃO
   const arrayDePosts = await getPosts();
 
-  function putPostsInFeed() {
+  async function putPostsInFeed() {
     getUserInfo();
 
     feedContainer.innerHTML = arrayDePosts
@@ -89,19 +89,23 @@ export default async () => {
             `
                 : ""
             }
+
             <div class="likesNumber">
               
               <button type="button" id="btn-like" class="btn-like" data-postid="${
                 post.postId
-              }" data-postAuthor="${auth().currentUser.uid}">
+              }" data-postAuthor="${auth().currentUser.uid}" data-like="${
+          post.likes
+        }">
                 <img ${
                   post.likes.includes(auth().currentUser.uid)
                     ? `src="${heart}"`
                     : `src="${noHeart}"`
-                } class="heart" alt="Likes">
+                } id="heart"
+                class="heart" alt="Likes">
               </button>
-              <p>${post.likes.length}</p>
 
+              <p id="numbersLike">${post.likes.length}</p>
             </div>
 
           </div>
@@ -121,17 +125,20 @@ export default async () => {
       const postId = parentNode.getAttribute("data-postid");
       const postAuthor = auth().currentUser.uid;
       const clickedBtn = parentNode.getAttribute("id");
-      // console.log(event.target.parentNode);
-      // console.log(btnDeletar);
+      const likes = parentNode.getAttribute("data-like");
 
       if (clickedBtn === "btn-delete") {
-        deletePost(postId);
         const post = document.getElementById("post");
         post.remove();
+        deletePost(postId);
       }
 
       if (clickedBtn === "btn-like") {
         likeIt(postId, postAuthor);
+      }
+
+      if (clickedBtn === "btn-like" && likes.includes(postAuthor)) {
+        disLikeIt(postId, postAuthor);
       }
     });
   }
@@ -185,6 +192,7 @@ export default async () => {
     document
       .getElementById("feed-container")
       .insertAdjacentElement("afterbegin", postContainer);
+
     postPlace.value = "";
   }
 
