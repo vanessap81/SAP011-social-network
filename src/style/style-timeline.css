@@ -37,6 +37,17 @@
   border: none;
 }
 
+#feed-container .post .dateAndLikes button,
+#feed-container div .post .dateAndLikes button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  width: 30px;
+  margin-right: 20px;
+}
+
 #main-timeline #div-logo button {
   border: none;
   background-color: #FBE5C8;
@@ -230,14 +241,6 @@
   margin: 0 0 0 70px;
 }
 
-#feed-container .post .dateAndLikes button,
-#feed-container div .post .dateAndLikes button {
-  width: 24px;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: #fff;
-}
 
 #feed-container .post .dateAndLikes button img,
 #feed-container div .post .dateAndLikes button img {
@@ -339,13 +342,6 @@
   #feed-container .post .dateAndLikes,
   #feed-container div .post .dateAndLikes {
     justify-content: end;
-  }
-
-  #feed-container .post .dateAndLikes button,
-  #feed-container div .post .dateAndLikes button {
-    cursor: pointer;
-    width: 30px;
-    margin-right: 20px;
   }
 
   #feed-container .post .dateAndLikes .postDate,

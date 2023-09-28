@@ -22,7 +22,7 @@ function loadContent() {
     case 'welcome':
       welcome();
       break;
-    case "timeline":
+    case 'timeline':
       timeline();
       break;
     default:
