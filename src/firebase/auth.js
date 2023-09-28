@@ -8,9 +8,9 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
-} from 'firebase/auth';
+} from "firebase/auth";
 
-import { app } from './config.js';
+import { app } from "./config.js";
 
 const auth = () => getAuth(app);
 
@@ -35,7 +35,7 @@ function checkLogin() {
       // console.log('usuário logado');
       return true;
     }
-    window.window.location.href = '#login';
+    window.location.href = "#login";
     return false;
   });
 }
@@ -105,7 +105,7 @@ async function exit() {
   // .catch((error) => {
   // An error happened.
   // });
-  window.location.hash = '#login';
+  window.location.hash = "#login";
 }
 
 export {
