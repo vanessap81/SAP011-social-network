@@ -5,7 +5,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  auth,
   onAuthStateChanged,
 } from 'firebase/auth';
 
@@ -14,7 +13,6 @@ import {
   signGoogle,
   createUser,
   resetLink,
-  getUserInfo,
   checkLogin,
 } from '../src/firebase/auth.js';
 
@@ -36,23 +34,16 @@ describe('Criar Usuario', () => {
   });
 });
 
-describe('getUserInfo', () => {
-  it('Recupera informações do usuário', () => {
-    const mockAuth2 = {
-      currentUser: {},
-    };
-    getUserInfo.mockReturnValueOnce(mockAuth2);
-    expect(auth().mockAuth2).toHaveBeenCalledTimes(1);
-  });
+it('Redirecionar para "timeline" após o login', () => {
+  signInWithPopup.mockResolvedValueOnce();
+  signGoogle();
+  expect(signInWithPopup).toHaveBeenCalledTimes(1);
 });
 
 describe('checkLogin', () => {
-  it('Verifica se o usuário está logado', () => {
-    checkLogin.mockResolvedValueOnce();
-    const email = 'teste@teste.com';
-    const password = '123456';
-    signIn(email, password);
-    expect(checkLogin).toHaveBeenCalledWith(onAuthStateChanged());
+  it('Verificar se o usuário está logado', () => {
+    checkLogin();
+    expect(onAuthStateChanged).toHaveBeenCalledTimes(1);
   });
 });
 
