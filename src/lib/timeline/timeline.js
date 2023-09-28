@@ -1,4 +1,4 @@
-import { exit, auth, getUserInfo } from "../../firebase/auth.js";
+import { exit, auth, getUserInfo } from '../../firebase/auth.js';
 
 import {
   savePost,
@@ -6,17 +6,17 @@ import {
   deletePost,
   likeIt,
   disLikeIt,
-} from "../../firebase/firestore.js";
+} from '../../firebase/firestore.js';
 
-import feedLogo from "../../img/logo-top-timeline.png";
-import exitIcon from "../../img/exit-icon.png";
-import sendIcon from "../../img/send-button-white.png";
-import homeIcon from "../../img/feed-home-icon.png";
-import postPhoto from "../../img/post-photo1-no-bg.png";
-import noHeart from "../../img/post-no-likes.png";
-import heart from "../../img/post-likes.png";
-import pencil from "../../img/post-edit.png";
-import trash from "../../img/post-trash.png";
+import feedLogo from '../../img/logo-top-timeline.png';
+import exitIcon from '../../img/exit-icon.png';
+import sendIcon from '../../img/send-button-white.png';
+import homeIcon from '../../img/feed-home-icon.png';
+import postPhoto from '../../img/post-photo1-no-bg.png';
+import noHeart from '../../img/post-no-likes.png';
+import heart from '../../img/post-likes.png';
+import pencil from '../../img/post-edit.png';
+import trash from '../../img/post-trash.png';
 
 const screen = `
       <section id="main-timeline">
@@ -45,15 +45,15 @@ const screen = `
       </section>`;
 
 export default async () => {
-  const container = document.getElementById("app");
+  const container = document.getElementById('app');
   container.innerHTML = screen;
 
   const exitBtn = document.getElementById('signout-button');
   exitBtn.addEventListener('click', exit);
 
-  const backToTop = document.querySelector("#home-button");
-  const feed = document.querySelector("#feed-container");
-  backToTop.addEventListener("click", () => {
+  const backToTop = document.querySelector('#home-button');
+  const feed = document.querySelector('#feed-container');
+  backToTop.addEventListener('click', () => {
     feed.scrollTo(0, 0);
   });
 
@@ -81,27 +81,27 @@ export default async () => {
           <div class="dateAndLikes">
             <p class="postDate">${post.data}</p>
             ${
-              post.author === auth().currentUser.uid
-                ? `
+  post.author === auth().currentUser.uid
+    ? `
               <button type="button" id="btn-delete" class="btn-delete" data-postid="${post.postId}"><img class="trash" src="${trash}" alt="Apagar   post"></button>
 
               <button type="button" id="btn-edit" class="btn-edit" data-postid="${post.postId}"><img class="edit" src="${pencil}" alt="Editar   post"></button>
             `
-                : ""
-            }
+    : ''
+}
 
             <div class="likesNumber">
               
               <button type="button" id="btn-like" class="btn-like" data-postid="${
-                post.postId
-              }" data-postAuthor="${auth().currentUser.uid}" data-like="${
-          post.likes
-        }">
+  post.postId
+}" data-postAuthor="${auth().currentUser.uid}" data-like="${
+  post.likes
+}">
                 <img ${
-                  post.likes.includes(auth().currentUser.uid)
-                    ? `src="${heart}"`
-                    : `src="${noHeart}"`
-                } id="heart"
+  post.likes.includes(auth().currentUser.uid)
+    ? `src="${heart}"`
+    : `src="${noHeart}"`
+} id="heart"
                 class="heart" alt="Likes">
               </button>
 
@@ -110,34 +110,34 @@ export default async () => {
 
           </div>
         </div>
-        `
+        `,
       )
-      .join("");
+      .join('');
   }
 
   async function postFunctions() {
     putPostsInFeed();
 
-    const feed = document.getElementById("feed-container");
+    const feed = document.getElementById('feed-container');
 
-    feed.addEventListener("click", (event) => {
+    feed.addEventListener('click', (event) => {
       const parentNode = event.target.parentNode;
-      const postId = parentNode.getAttribute("data-postid");
+      const postId = parentNode.getAttribute('data-postid');
       const postAuthor = auth().currentUser.uid;
-      const clickedBtn = parentNode.getAttribute("id");
-      const likes = parentNode.getAttribute("data-like");
+      const clickedBtn = parentNode.getAttribute('id');
+      const likes = parentNode.getAttribute('data-like');
 
-      if (clickedBtn === "btn-delete") {
-        const post = document.getElementById("post");
+      if (clickedBtn === 'btn-delete') {
+        const post = document.getElementById('post');
         post.remove();
         deletePost(postId);
       }
 
-      if (clickedBtn === "btn-like") {
+      if (clickedBtn === 'btn-like') {
         likeIt(postId, postAuthor);
       }
 
-      if (clickedBtn === "btn-like" && likes.includes(postAuthor)) {
+      if (clickedBtn === 'btn-like' && likes.includes(postAuthor)) {
         disLikeIt(postId, postAuthor);
       }
     });
@@ -147,7 +147,7 @@ export default async () => {
 
   // FUNÇÃO DE POSTAR CONTEÚDO
   function postIt() {
-    const postContainer = document.createElement("div");
+    const postContainer = document.createElement('div');
     const user = getUserInfo();
 
     const date = Date.now();
@@ -167,19 +167,19 @@ export default async () => {
           <div class="dateAndLikes">
             <p class="postDate">${postDate}</p>
             ${
-              user.author === auth().currentUser.uid
-                ? `
+  user.author === auth().currentUser.uid
+    ? `
               <button type="button" class="btn-delete" data-postid="${user.postId}"><img class="trash" src="${trash}" alt="Apagar   post"></button>
 
               <button type="button" id="btn-edit" class="btn-edit" data-postid="${user.postId}"><img class="edit" src="${pencil}" alt="Editar   post"></button>
             `
-                : ""
-            }
+    : ''
+}
             <div class="likesNumber">
               
               <button type="button" class="btn-like" data-postid="${
-                user.postId
-              }" data-postAuthor="${auth().currentUser.uid}">
+  user.postId
+}" data-postAuthor="${auth().currentUser.uid}">
                 <img class="heart" src="${noHeart}" alt="Likes">
               </button>
               <p>0</p>
@@ -190,14 +190,14 @@ export default async () => {
     postContainer.innerHTML = postLayout;
 
     document
-      .getElementById("feed-container")
-      .insertAdjacentElement("afterbegin", postContainer);
+      .getElementById('feed-container')
+      .insertAdjacentElement('afterbegin', postContainer);
 
-    postPlace.value = "";
+    postPlace.value = '';
   }
 
   async function createNewPost() {
-    if (postPlace.value !== "") {
+    if (postPlace.value !== '') {
       await savePost(postPlace.value);
       postIt();
     }
