@@ -9,10 +9,10 @@ import {
   arrayUnion,
   arrayRemove,
   deleteDoc,
-} from 'firebase/firestore';
+} from "firebase/firestore";
 
-import { getAuth } from 'firebase/auth';
-import { db, app } from './config.js';
+import { getAuth } from "firebase/auth";
+import { db, app } from "./config.js";
 
 const auth = () => getAuth(app);
 
@@ -29,7 +29,7 @@ async function savePost(postText) {
     data: postDate,
   };
 
-  const docRef = await addDoc(collection(db, 'posts'), post);
+  const docRef = await addDoc(collection(db, "posts"), post);
   post.id = docRef.id;
   return post;
 }
@@ -58,7 +58,7 @@ async function savePost(postText) {
 // }
 
 async function getPosts() {
-  const postOrder = query(collection(db, 'posts'), orderBy('data', 'desc'));
+  const postOrder = query(collection(db, "posts"), orderBy("data", "desc"));
 
   const querySnapshot = await getDocs(postOrder);
   const postsInFirebase = [];
@@ -71,25 +71,23 @@ async function getPosts() {
 }
 
 function deletePost(postId) {
-  const postRef = doc(db, 'posts', postId);
+  const postRef = doc(db, "posts", postId);
   deleteDoc(postRef);
 }
 
 function likeIt(postId, uid) {
-  updateDoc(doc(db, 'posts', postId), {
+  updateDoc(doc(db, "posts", postId), {
     likes: arrayUnion(uid),
   });
 }
 
 function disLikeIt(postId, uid) {
-  updateDoc(doc(db, 'posts', postId), {
+  updateDoc(doc(db, "posts", postId), {
     likes: arrayRemove(uid),
   });
 }
 
-export {
-  auth, savePost, getPosts, deletePost, likeIt, disLikeIt,
-};
+export { auth, savePost, getPosts, deletePost, likeIt, disLikeIt };
 
 // async function getPosts() {
 //   const querySnapshot = await getDocs(collection(db, "posts"));

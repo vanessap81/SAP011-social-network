@@ -45,17 +45,17 @@ function getUserInfo() {
 }
 
 async function signIn(email, password) {
-  await signInWithEmailAndPassword(auth(), email, password);
-  // .then((userCredential) => {
-  // const user = userCredential.user;
-  // ...
+  await signInWithEmailAndPassword(auth(), email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+  window.location.hash = "#timeline";
 }
-//  .catch((error) => {
-// const errorCode = error.code;
-// const errorMessage = error.message;
-// });
-// window.location.hash = "#timeline";
-// }
 
 const provider = new GoogleAuthProvider();
 
