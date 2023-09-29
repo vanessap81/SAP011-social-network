@@ -41,6 +41,21 @@ function getUserInfo() {
   return auth().currentUser;
 }
 
+// async function signIn(email, password) {
+//   await signInWithEmailAndPassword(auth(), email, password);
+//   // .then((userCredential) => {
+//   // const user = userCredential.user;
+//   // ...
+// }
+//  .catch((error) => {
+// const errorCode = error.code;
+// const errorMessage = error.message;
+// });
+// window.location.hash = "#timeline";
+// }
+
+
+
 async function signIn(email, password) {
   await signInWithEmailAndPassword(auth(), email, password);
 }
