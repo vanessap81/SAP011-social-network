@@ -8,9 +8,9 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
-} from "firebase/auth";
+} from 'firebase/auth';
 
-import { app } from "./config.js";
+import { app } from './config.js';
 
 const auth = () => getAuth(app);
 
@@ -35,7 +35,7 @@ function checkLogin() {
       // console.log('usuário logado');
       return true;
     }
-    window.location.href = "#login";
+    window.location.href = '#login';
     return false;
   });
 }
@@ -99,13 +99,8 @@ async function resetLink(email) {
 }
 
 async function exit() {
-  await signOut(auth()).then(() => {
-    // Sign-out successful.
-  });
-  // .catch((error) => {
-  // An error happened.
-  // });
-  window.location.hash = "#login";
+  await signOut(auth()).then(() => {});
+  window.location.hash = '#login';
 }
 
 export {

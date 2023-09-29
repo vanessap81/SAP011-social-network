@@ -19,6 +19,7 @@ import {
 } from '../src/firebase/auth.js';
 
 jest.mock('firebase/auth');
+jest.mock('firebase/firestore');
 
 describe('Criar Usuario', () => {
   it('cria uma conta do usuário utilizando o email e senha', async () => {
@@ -47,12 +48,9 @@ describe('getUserInfo', () => {
 });
 
 describe('checkLogin', () => {
-  it('Verifica se o usuário está logado', () => {
-    checkLogin.mockResolvedValueOnce();
-    const email = 'teste@teste.com';
-    const password = '123456';
-    signIn(email, password);
-    expect(checkLogin).toHaveBeenCalledWith(onAuthStateChanged());
+  it('Verificar se o usuário está logado', () => {
+    checkLogin();
+    expect(onAuthStateChanged).toHaveBeenCalledTimes(1);
   });
 });
 
