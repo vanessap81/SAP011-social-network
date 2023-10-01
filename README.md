@@ -18,7 +18,7 @@
 O projeto MyPet foi desenvolvido por:
 
 * Júlia Ribeiro [GitHub](https://github.com/jumvribeiro)
-* Vanessa Ponte [GitHub] (https://github.com/vanessap81)
+* Vanessa Ponte [GitHub](https://github.com/vanessap81)
 
 * Link do projeto:
 
