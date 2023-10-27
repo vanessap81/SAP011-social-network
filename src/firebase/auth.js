@@ -35,7 +35,7 @@ function checkLogin() {
       // console.log('usuário logado');
       return true;
     }
-    window.window.location.href = '#login';
+    window.location.href = '#login';
     return false;
   });
 }
@@ -86,11 +86,10 @@ async function signGoogle() {
 // }
 
 async function resetLink(email) {
-  await sendPasswordResetEmail(auth(), email)
-    .then(() => {
-      // Password reset email sent!
-      // ..
-    });
+  await sendPasswordResetEmail(auth(), email).then(() => {
+    // Password reset email sent!
+    // ..
+  });
   // .catch((error) => {
   // const errorCode = error.code;
   // const errorMessage = error.message;
@@ -100,10 +99,9 @@ async function resetLink(email) {
 }
 
 async function exit() {
-  await signOut(auth())
-    .then(() => {
-      // Sign-out successful.
-    });
+  await signOut(auth()).then(() => {
+    // Sign-out successful.
+  });
   // .catch((error) => {
   // An error happened.
   // });

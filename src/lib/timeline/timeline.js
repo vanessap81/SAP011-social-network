@@ -118,9 +118,15 @@ export default async () => {
   async function postFunctions() {
     putPostsInFeed();
 
+<<<<<<< HEAD
     const feed = document.getElementById('feed-container');
 
     feed.addEventListener('click', (event) => {
+=======
+    const feedPlace = document.getElementById('feed-container');
+
+    feedPlace.addEventListener('click', (event) => {
+>>>>>>> 0add2dfed16a2ab96991316164ed558c786f5605
       const parentNode = event.target.parentNode;
       const postId = parentNode.getAttribute('data-postid');
       const postAuthor = auth().currentUser.uid;
@@ -200,6 +206,7 @@ export default async () => {
     if (postPlace.value !== '') {
       await savePost(postPlace.value);
       postIt();
+      window.location.reload(true);
     }
   }
 

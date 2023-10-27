@@ -9,7 +9,10 @@ import {
   arrayUnion,
   arrayRemove,
   deleteDoc,
+<<<<<<< HEAD
   onSnapshot,
+=======
+>>>>>>> 0add2dfed16a2ab96991316164ed558c786f5605
 } from 'firebase/firestore';
 
 import { getAuth } from 'firebase/auth';
@@ -63,10 +66,10 @@ async function getPosts() {
 
   const querySnapshot = await getDocs(postOrder);
   const postsInFirebase = [];
-  querySnapshot.forEach((doc) => {
-    const collection = doc.data();
-    collection.postId = doc.id;
-    postsInFirebase.push(collection);
+  querySnapshot.forEach((post) => {
+    const postCollection = post.data();
+    collection.postId = post.id;
+    postsInFirebase.push(postCollection);
   });
   return postsInFirebase;
 }
